@@ -1,6 +1,7 @@
-import 'package:flutter/cupertino.dart'; // For CupertinoPageRoute
 import 'package:flutter/material.dart';
-import 'dart:async'; // For Timer
+import 'dart:async';
+
+import 'package:frontend/screens/LogIn_Page..dart'; // For Timer
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
@@ -149,7 +150,7 @@ class _SecondScreenState extends State<SecondScreen>
       // Navigate to the LoginPage
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const LoginPage()),
+        MaterialPageRoute(builder: (context) => const LogInPage()),
       );
     });
   }
@@ -224,7 +225,7 @@ class _SecondScreenState extends State<SecondScreen>
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const LoginPage()),
+                    MaterialPageRoute(builder: (context) => const LogInPage()),
                   );
                 },
                 child: Container(

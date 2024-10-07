@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Register_Page.dart'; // Import your RegisterPage
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LogInPage extends StatefulWidget {
+  const LogInPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LogInPageState createState() => _LogInPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LogInPageState extends State<LogInPage> {
   // State variable to control password visibility
   bool _isPasswordVisible = false;
 
@@ -23,15 +23,26 @@ class _LoginPageState extends State<LoginPage> {
         appBar: AppBar(
           backgroundColor: Colors.green[700],
           bottom: const TabBar(
-            indicatorColor: Colors.green,
+            indicatorColor: Colors.black,
             indicatorWeight: 3.0,
-            labelColor: Colors.green,
+            labelColor: Colors.white,
             unselectedLabelColor: Colors.black,
             tabs: [
-              Tab(text: 'Login'),
-              Tab(text: 'Register'), // This tab is already correctly labeled as 'Register'
+              Tab(
+                child: Text(
+                  'Login',
+                  style: TextStyle(fontSize: 16), // Change the font size here
+                ),
+              ),
+              Tab(
+                child: Text(
+                  'Register',
+                  style: TextStyle(fontSize: 16), // Change the font size here
+                ),
+              ),
             ],
           ),
+
         ),
         body: TabBarView(
           children: [
@@ -57,8 +68,11 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 20),
             TextField(
+              keyboardType: TextInputType.emailAddress, // Sets the input type to email
+              autocorrect: false, // Disable autocorrect for email input
+              textInputAction: TextInputAction.next, // Allows moving to the next input field
               decoration: InputDecoration(
-                labelText: 'Username',
+                labelText: 'Email',
                 labelStyle: const TextStyle(color: Colors.grey), // Default label color
                 contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                 border: OutlineInputBorder(
@@ -75,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
+
             const SizedBox(height: 15),
             TextField(
               obscureText: !_isPasswordVisible, // Toggle password visibility
@@ -138,20 +153,7 @@ class _LoginPageState extends State<LoginPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text("Don't have an account?"),
-                const SizedBox(width: 8), // Optional space between texts
-                InkWell(
-                  onTap: () {
-                    // Navigate to the register page
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => const RegisterPage()), // Update to use RegisterPage
-                    );
-                  },
-                  child: const Text(
-                    'Register',
-                    style: TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
-                  ),
-                ),
+                const Text("Don't have an account? Click Register"),
               ],
             ),
             const SizedBox(height: 20),
