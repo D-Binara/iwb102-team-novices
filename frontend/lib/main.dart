@@ -10,13 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'User Log App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Landing_Page(), // Navigate to the landing page
+      home: LandingPage(),  // This should point to the widget you're working on
     );
   }
 }
