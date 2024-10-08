@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Register_Page.dart'; // Import your RegisterPage
+import 'package:frontend/screens/Register_Page.dart';
+
+import 'Home_Page.dart'; // Import your RegisterPage
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -42,7 +44,6 @@ class _LogInPageState extends State<LogInPage> {
               ),
             ],
           ),
-
         ),
         body: TabBarView(
           children: [
@@ -68,55 +69,69 @@ class _LogInPageState extends State<LogInPage> {
             ),
             const SizedBox(height: 20),
             TextField(
-              keyboardType: TextInputType.emailAddress, // Sets the input type to email
+              keyboardType:
+                  TextInputType.emailAddress, // Sets the input type to email
               autocorrect: false, // Disable autocorrect for email input
-              textInputAction: TextInputAction.next, // Allows moving to the next input field
+              textInputAction:
+                  TextInputAction.next, // Allows moving to the next input field
               decoration: InputDecoration(
                 labelText: 'Email',
-                labelStyle: const TextStyle(color: Colors.grey), // Default label color
-                contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                labelStyle:
+                    const TextStyle(color: Colors.grey), // Default label color
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.black), // Default border color
+                  borderSide: const BorderSide(
+                      color: Colors.black), // Default border color
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.green), // Focused border color
+                  borderSide: const BorderSide(
+                      color: Colors.green), // Focused border color
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.greenAccent), // Focused error border color
+                  borderSide: const BorderSide(
+                      color: Colors.greenAccent), // Focused error border color
                 ),
               ),
             ),
-
             const SizedBox(height: 15),
             TextField(
               obscureText: !_isPasswordVisible, // Toggle password visibility
               decoration: InputDecoration(
                 labelText: 'Password',
-                labelStyle: const TextStyle(color: Colors.grey), // Default label color
-                contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                labelStyle:
+                    const TextStyle(color: Colors.grey), // Default label color
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0, horizontal: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.black), // Default border color
+                  borderSide: const BorderSide(
+                      color: Colors.black), // Default border color
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.green), // Focused border color
+                  borderSide: const BorderSide(
+                      color: Colors.green), // Focused border color
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.green), // Focused error border color
+                  borderSide: const BorderSide(
+                      color: Colors.green), // Focused error border color
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible ? Icons.visibility_off : Icons.visibility_outlined,
+                    _isPasswordVisible
+                        ? Icons.visibility_off
+                        : Icons.visibility_outlined,
                     color: Colors.green,
                   ),
                   onPressed: () {
                     setState(() {
-                      _isPasswordVisible = !_isPasswordVisible; // Toggle visibility
+                      _isPasswordVisible =
+                          !_isPasswordVisible; // Toggle visibility
                     });
                   },
                 ),
@@ -135,7 +150,8 @@ class _LogInPageState extends State<LogInPage> {
                           _isChecked = value!; // Update the checkbox state
                         });
                       },
-                      activeColor: Colors.green, // Set the checkbox color to green
+                      activeColor:
+                          Colors.green, // Set the checkbox color to green
                     ),
                     const Text('Remember Me'),
                   ],
@@ -158,7 +174,12 @@ class _LogInPageState extends State<LogInPage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                );
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 minimumSize: const Size(double.infinity, 50),
@@ -183,7 +204,8 @@ class _LogInPageState extends State<LogInPage> {
               ],
             ),
             const SizedBox(height: 40),
-            buildSocialLoginButton('LogIn with Google', 'assets/Auth/google.png', Colors.white),
+            buildSocialLoginButton(
+                'LogIn with Google', 'assets/Auth/google.png', Colors.white),
           ],
         ),
       ),
@@ -191,18 +213,35 @@ class _LogInPageState extends State<LogInPage> {
   }
 
   Widget buildSocialLoginButton(String text, String logoAsset, Color bgColor) {
-    return ElevatedButton.icon(
-      onPressed: () {},
-      icon: Image.asset(logoAsset, height: 20), // Set your logo here
-      label: Text(
-        text,
-        style: TextStyle(color: bgColor == Colors.white ? Colors.black : Colors.white),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color:
+                Colors.black.withOpacity(0.2), // Dark shadow color with opacity
+            spreadRadius: 2, // Spread radius of the shadow
+            blurRadius: 6, // Blur radius for the shadow softness
+            offset: const Offset(0, 3), // Offset for the shadow
+          ),
+        ],
+        borderRadius:
+            BorderRadius.circular(10), // Same border radius as the button
       ),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: bgColor,
-        minimumSize: const Size(double.infinity, 50),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+      child: ElevatedButton.icon(
+        onPressed: () {},
+        icon: Image.asset(logoAsset, height: 20), // Set your logo here
+        label: Text(
+          text,
+          style: TextStyle(
+            color: bgColor == Colors.white ? Colors.black : Colors.white,
+          ),
+        ),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: bgColor,
+          minimumSize: const Size(double.infinity, 50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
         ),
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-import 'package:frontend/screens/LogIn_Page..dart'; // For Timer
+import 'package:frontend/screens/LogIn_Page.dart'; // For Timer
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
