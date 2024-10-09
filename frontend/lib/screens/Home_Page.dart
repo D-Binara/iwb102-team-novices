@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Shop_Page.dart';
-import '../components/SearchBar.dart'; // Adjust 'your_project_name'
+import '../components/SearchBar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
