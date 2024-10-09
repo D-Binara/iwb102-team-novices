@@ -7,142 +7,150 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: [
-            // Add margin top to Search Bar with + icon
-            Container(
-              margin: const EdgeInsets.only(top: 80), // Add top margin
-              child: Row(
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        body: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Column(
+            children: [
+              // Add margin top to Search Bar with + icon
+              Container(
+                margin: const EdgeInsets.only(top: 80), // Add top margin
+                child: Row(
+                  children: [
+                    // Search Bar
+                    Expanded(
+                      child: CustomSearchBar(), // Include the SearchBar widget
+                    ),
+
+                    const SizedBox(width: 10), // Add some space between the search bar and the button
+
+                    // Circular + button
+                    Container(
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.green, // Background color of the + button
+                      ),
+                      child: IconButton(
+                        icon: const Icon(Icons.add, color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ShopPage(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Categories Section
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Search Bar
-                  Expanded(
-                    child: CustomSearchBar(), // Include the SearchBar widget
+                  const Text(
+                    'Shop by category',
+                    style: TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-
-                  const SizedBox(width: 10), // Add some space between the search bar and the button
-
-                  // Circular + button
-                  Container(
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.green, // Background color of the + button
-                    ),
-                    child: IconButton(
-                      icon: const Icon(Icons.add, color: Colors.white),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const ShopPage()),
-                        );
-                      },
-                    ),
+                  TextButton(
+                    onPressed: () {
+                      // Handle 'See all' button press
+                    },
+                    child: const Text('See all'),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-            // Categories Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Shop by category',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // Horizontal Scroll of Categories
+              SizedBox(
+                height: 60,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: const [
+                    CategoryIcon(
+                        imageUrl: 'assets/Landing/onboarding_1.png',
+                        name: '1'),
+                    CategoryIcon(
+                        imageUrl: 'assets/Landing/onboarding_1.png',
+                        name: ' 2'),
+                    CategoryIcon(
+                        imageUrl: 'assets/Landing/onboarding_1.png',
+                        name: ' 3'),
+                    CategoryIcon(
+                        imageUrl: 'assets/Landing/onboarding_1.png',
+                        name: ' 4'),
+                    CategoryIcon(
+                        imageUrl: 'assets/Landing/onboarding_1.png',
+                        name: ' 5'),
+                  ],
                 ),
-                TextButton(
-                  onPressed: () {
-                    // Handle 'See all' button press
-                  },
-                  child: const Text('See all'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
+              ),
+              const SizedBox(height: 40),
 
-            // Horizontal Scroll of Categories
-            SizedBox(
-              height: 60,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
+              // Recommended Section
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: const [
-                  CategoryIcon(
-                      imageUrl: 'assets/Landing/onboarding_1.png',
-                      name: '1'),
-                  CategoryIcon(
-                      imageUrl: 'assets/Landing/onboarding_1.png',
-                      name: ' 2'),
-                  CategoryIcon(
-                      imageUrl: 'assets/Landing/onboarding_1.png',
-                      name: ' 3'),
-                  CategoryIcon(
-                      imageUrl: 'assets/Landing/onboarding_1.png',
-                      name: ' 4'),
-                  CategoryIcon(
-                      imageUrl: 'assets/Landing/onboarding_1.png',
-                      name: ' 5'),
+                  Text(
+                    'Recommended',
+                    style: TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ],
               ),
-            ),
 
-            const SizedBox(height: 40),
-
-            // Recommended Section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Text(
-                  'Recommended',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              // Grid of Recommended Items
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  childAspectRatio: 0.8,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 10,
+                  children: const [
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Mango',
+                      location: 'Deniyaya',
+                      price: '6 USD',
+                    ),
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Banana',
+                      location: 'Horana',
+                      price: '4 USD',
+                    ),
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Apples',
+                      location: 'Colombo',
+                      price: '10 USD',
+                    ),
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Tomatoes',
+                      location: 'Siripura',
+                      price: '1 USD',
+                    ),
+                  ],
                 ),
-              ],
-            ),
-
-
-            // Grid of Recommended Items
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                childAspectRatio: 0.8,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                children: const [
-                  RecommendedItem(
-                    imageUrl: 'assets/Landing/onboarding_1.png',
-                    title: 'Mango',
-                    location: 'Deniyaya',
-                    price: '6 USD',
-                  ),
-                  RecommendedItem(
-                    imageUrl: 'assets/Landing/onboarding_1.png',
-                    title: 'Banana',
-                    location: 'Horana',
-                    price: '4 USD',
-                  ),
-                  RecommendedItem(
-                    imageUrl: 'assets/Landing/onboarding_1.png',
-                    title: 'Apples',
-                    location: 'Colombo',
-                    price: '10 USD',
-                  ),
-                  RecommendedItem(
-                    imageUrl: 'assets/Landing/onboarding_1.png',
-                    title: 'Tomatoes',
-                    location: 'Siripura',
-                    price: '1 USD',
-                  ),
-                ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
 
 class CategoryIcon extends StatelessWidget {
   final String imageUrl;
@@ -216,7 +224,7 @@ class _RecommendedItemState extends State<RecommendedItem> {
             offset: const Offset(0, 0), // Keep it centered for a border effect
           ),
         ],
-        border: Border.all(color: Colors.grey.shade300), // Keep the original border
+        border: Border.all(color: Colors.green), // Keep the original border
       ),
       child: Stack(
         children: [
