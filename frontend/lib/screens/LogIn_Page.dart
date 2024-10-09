@@ -21,35 +21,40 @@ class _LogInPageState extends State<LogInPage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.green[700],
-          bottom: const TabBar(
-            indicatorColor: Colors.black,
-            indicatorWeight: 3.0,
-            labelColor: Colors.white,
-            unselectedLabelColor: Colors.black,
-            tabs: [
-              Tab(
-                child: Text(
-                  'Login',
-                  style: TextStyle(fontSize: 16), // Change the font size here
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus(); // Hide the keyboard when tapping outside
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.green[700],
+            bottom: const TabBar(
+              indicatorColor: Colors.black,
+              indicatorWeight: 3.0,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.black,
+              tabs: [
+                Tab(
+                  child: Text(
+                    'Login',
+                    style: TextStyle(fontSize: 16), // Change the font size here
+                  ),
                 ),
-              ),
-              Tab(
-                child: Text(
-                  'Register',
-                  style: TextStyle(fontSize: 16), // Change the font size here
+                Tab(
+                  child: Text(
+                    'Register',
+                    style: TextStyle(fontSize: 16), // Change the font size here
+                  ),
                 ),
-              ),
+              ],
+            ),
+          ),
+          body: TabBarView(
+            children: [
+              buildLoginForm(context), // This is your login form
+              const RegisterPage(), // Replace the center text with RegisterPage
             ],
           ),
-        ),
-        body: TabBarView(
-          children: [
-            buildLoginForm(context), // This is your login form
-            const RegisterPage(), // Replace the center text with RegisterPage
-          ],
         ),
       ),
     );
@@ -69,31 +74,24 @@ class _LogInPageState extends State<LogInPage> {
             ),
             const SizedBox(height: 20),
             TextField(
-              keyboardType:
-                  TextInputType.emailAddress, // Sets the input type to email
+              keyboardType: TextInputType.emailAddress, // Sets the input type to email
               autocorrect: false, // Disable autocorrect for email input
-              textInputAction:
-                  TextInputAction.next, // Allows moving to the next input field
+              textInputAction: TextInputAction.next, // Allows moving to the next input field
               decoration: InputDecoration(
                 labelText: 'Email',
-                labelStyle:
-                    const TextStyle(color: Colors.grey), // Default label color
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 15.0),
+                labelStyle: const TextStyle(color: Colors.grey), // Default label color
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Colors.black), // Default border color
+                  borderSide: const BorderSide(color: Colors.black), // Default border color
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Colors.green), // Focused border color
+                  borderSide: const BorderSide(color: Colors.green), // Focused border color
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Colors.greenAccent), // Focused error border color
+                  borderSide: const BorderSide(color: Colors.greenAccent), // Focused error border color
                 ),
               ),
             ),
@@ -102,36 +100,28 @@ class _LogInPageState extends State<LogInPage> {
               obscureText: !_isPasswordVisible, // Toggle password visibility
               decoration: InputDecoration(
                 labelText: 'Password',
-                labelStyle:
-                    const TextStyle(color: Colors.grey), // Default label color
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 15.0),
+                labelStyle: const TextStyle(color: Colors.grey), // Default label color
+                contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Colors.black), // Default border color
+                  borderSide: const BorderSide(color: Colors.black), // Default border color
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Colors.green), // Focused border color
+                  borderSide: const BorderSide(color: Colors.green), // Focused border color
                 ),
                 focusedErrorBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                      color: Colors.green), // Focused error border color
+                  borderSide: const BorderSide(color: Colors.green), // Focused error border color
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility_outlined,
+                    _isPasswordVisible ? Icons.visibility_off : Icons.visibility_outlined,
                     color: Colors.green,
                   ),
                   onPressed: () {
                     setState(() {
-                      _isPasswordVisible =
-                          !_isPasswordVisible; // Toggle visibility
+                      _isPasswordVisible = !_isPasswordVisible; // Toggle visibility
                     });
                   },
                 ),
@@ -150,8 +140,7 @@ class _LogInPageState extends State<LogInPage> {
                           _isChecked = value!; // Update the checkbox state
                         });
                       },
-                      activeColor:
-                          Colors.green, // Set the checkbox color to green
+                      activeColor: Colors.green, // Set the checkbox color to green
                     ),
                     const Text('Remember Me'),
                   ],
@@ -168,8 +157,8 @@ class _LogInPageState extends State<LogInPage> {
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Don't have an account? Click Register"),
+              children: const [
+                Text("Don't have an account? Click Register"),
               ],
             ),
             const SizedBox(height: 20),
@@ -204,8 +193,7 @@ class _LogInPageState extends State<LogInPage> {
               ],
             ),
             const SizedBox(height: 40),
-            buildSocialLoginButton(
-                'LogIn with Google', 'assets/Auth/google.png', Colors.white),
+            buildSocialLoginButton('LogIn with Google', 'assets/Auth/google.png', Colors.white),
           ],
         ),
       ),
@@ -217,15 +205,13 @@ class _LogInPageState extends State<LogInPage> {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color:
-                Colors.black.withOpacity(0.2), // Dark shadow color with opacity
+            color: Colors.black.withOpacity(0.2), // Dark shadow color with opacity
             spreadRadius: 2, // Spread radius of the shadow
             blurRadius: 6, // Blur radius for the shadow softness
             offset: const Offset(0, 3), // Offset for the shadow
           ),
         ],
-        borderRadius:
-            BorderRadius.circular(10), // Same border radius as the button
+        borderRadius: BorderRadius.circular(10), // Same border radius as the button
       ),
       child: ElevatedButton.icon(
         onPressed: () {},
