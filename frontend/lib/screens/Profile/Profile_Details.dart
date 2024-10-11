@@ -1,7 +1,87 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
-class ProfileDetails extends StatelessWidget {
+class ProfileDetails extends StatefulWidget {
   const ProfileDetails({super.key});
+
+  @override
+  _ProfileDetailsState createState() => _ProfileDetailsState();
+}
+
+class _ProfileDetailsState extends State<ProfileDetails> {
+  File? _image; // File to store the selected image
+
+  // Function to pick an image from the gallery
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path); // Set the image file
+      });
+    }
+  }
+
+  // Function to show the bottom popup menu
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.remove_red_eye),
+                title: const Text('View Image'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _viewImageFullScreen(); // View image in full screen
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.delete),
+                title: const Text('Remove Image'),
+                onTap: () {
+                  Navigator.pop(context);
+                  _removeImage(); // Remove image from the grid
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  // Function to view the image in full screen
+  void _viewImageFullScreen() {
+    if (_image != null) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Scaffold(
+            appBar: AppBar(
+              backgroundColor: Colors.black,
+              title: const Text("Full Image"),
+            ),
+            body: Center(
+              child: Image.file(_image!),
+            ),
+          ),
+        ),
+      );
+    }
+  }
+
+  // Function to remove the image from the grid
+  void _removeImage() {
+    setState(() {
+      _image = null; // Set the image to null (remove it from the grid)
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,20 +106,27 @@ class ProfileDetails extends StatelessWidget {
                 child: Stack(
                   alignment: Alignment.bottomRight, // Align the icon at the bottom right
                   children: [
-                    CircleAvatar(
-                      radius: 80, // Circle size
-                      backgroundColor: Colors.green[200], // Circle color
-                      child: const Text(
-                        'Profile', // Example text inside the circle
-                        style: TextStyle(color: Colors.white, fontSize: 30),
+                    Container(
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.green, width: 2), // Add border with width 2
+                      ),
+                      child: CircleAvatar(
+                        radius: 80, // Circle size
+                        backgroundColor: Colors.green[200], // Circle color
+                        backgroundImage: _image != null ? FileImage(_image!) : null, // Display selected image
+                        child: _image == null
+                            ? const Text(
+                          'Profile', // Example text inside the circle
+                          style: TextStyle(color: Colors.white, fontSize: 30),
+                        )
+                            : null, // Remove text when an image is selected
                       ),
                     ),
                     // Camera Icon Button
                     IconButton(
                       padding: const EdgeInsets.all(5.0), // Padding around the icon
-                      onPressed: () {
-                        // Handle camera button press here
-                      },
+                      onPressed: _pickImage, // Call image picker when pressed
                       icon: Container(
                         decoration: const BoxDecoration(
                           shape: BoxShape.circle,
@@ -47,7 +134,7 @@ class ProfileDetails extends StatelessWidget {
                         ),
                         child: const Icon(
                           Icons.camera_alt, // Camera icon
-                          color: Colors.green, // Icon color
+                          color: Colors.black, // Icon color
                           size: 25, // Icon size
                         ),
                       ),
@@ -55,6 +142,7 @@ class ProfileDetails extends StatelessWidget {
                   ],
                 ),
               ),
+
               const SizedBox(height: 20), // Space below the circle
 
               // Additional Information Text
@@ -96,7 +184,6 @@ class ProfileDetails extends StatelessWidget {
                   contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0), // Adjust size by padding
                 ),
               ),
-
               const SizedBox(height: 20), // Space between fields
 
               TextField(
