@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Landing_Page.dart'; // Your LandingPage
+import 'package:frontend/screens/Home_Page.dart';
+import 'package:frontend/screens/Landing_Page.dart';
 
 
 void main() {

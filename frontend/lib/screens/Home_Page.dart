@@ -41,7 +41,7 @@ class HomePage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      // Handle 'See all' button press
+
                     },
                     child: const Text('See all'),
                   ),
