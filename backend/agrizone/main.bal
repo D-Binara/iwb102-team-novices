@@ -1,12 +1,20 @@
 import ballerina/crypto;
 import ballerinax/mysql;
-import ballerinax/mysql.driver as _; // For MySQL driver
+import ballerinax/mysql.driver as _;
 import ballerina/sql;
 
 public type User record {| 
     int user_id?;
     string username;
     string password;
+|};
+
+public type Item record {| 
+    int item_id?;
+    string item_name;
+    int item_quentity;
+    int item_price;
+    string item_category;
 |};
 
 configurable string USER = ?;
@@ -41,7 +49,6 @@ isolated function loginUser(string username, string password) returns string|err
         `SELECT * FROM Users WHERE username = ${username}`
     );
 
-    // Hash the provided password to compare with the stored hash
     byte[] hashedPassword = crypto:hashMd5(password.toBytes());
     string passwordHash = hashedPassword.toBase16();
 
@@ -49,5 +56,21 @@ isolated function loginUser(string username, string password) returns string|err
         return "Login successful for user: " + username;
     } else {
         return error("Invalid username or password");
+    }
+}
+
+
+isolated function addItem(string item_name, int item_quantity , int item_price , string item_category) returns int|error {
+
+    sql:ExecutionResult result = check dbClient->execute(` 
+        INSERT INTO Items (item_name, item_quantity, item_price, item_category)
+        VALUES (${item_name}, ${item_quantity}, ${item_price} ,${item_category})
+    `);
+    
+    int|string? lastInsertId = result.lastInsertId;
+    if lastInsertId is int {
+        return lastInsertId;
+    } else {
+        return error("Unable to register user");
     }
 }
