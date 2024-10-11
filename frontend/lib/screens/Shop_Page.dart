@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../components/SearchBar.dart'; // Make sure this component is correctly implemented
 
 class ShopPage extends StatelessWidget {
