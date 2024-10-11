@@ -5,22 +5,23 @@ import '../screens/Home_Page.dart';
 import '../screens/Shop_Page.dart';
 import '../screens/Profile_Page.dart'; // Import the ProfilePage
 
-class NabBar extends StatefulWidget {
-  const NabBar({super.key});
+class NavBar extends StatefulWidget {
+  const NavBar({super.key});
 
   @override
-  _NabBarState createState() => _NabBarState();
+  _NavBarState createState() => _NavBarState();
 }
 
-class _NabBarState extends State<NabBar> {
+class _NavBarState extends State<NavBar> {
   int _selectedIndex = 0;
 
   // List of pages to navigate to, including the ProfilePage
   final List<Widget> _pages = [
-    HomePage(), // Replace with your HomePage widget
-    ShopPage(), // Replace with your ShopPage widget
-    BlogPage(), // Replace with your BlogPage widget
-     // Add the ProfilePage here
+    HomePage(),
+    ShopPage(),
+    BlogPage(),
+    Profile()
+
   ];
 
   void _onItemTapped(int index) {
