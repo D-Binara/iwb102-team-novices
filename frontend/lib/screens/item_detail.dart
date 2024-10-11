@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/Profile_Page.dart';
 
 class ItemDetailPage extends StatefulWidget {
   final String title;
@@ -82,7 +83,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(widget.images[index], fit: BoxFit.cover),
+                        child: Image.asset(widget.images[index],
+                            fit: BoxFit.cover),
                       ),
                     );
                   },
@@ -98,7 +100,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     height: 8,
                     width: 8,
                     decoration: BoxDecoration(
-                      color: _currentIndex == index ? Colors.green : Colors.black,
+                      color:
+                          _currentIndex == index ? Colors.green : Colors.black,
                       shape: BoxShape.circle,
                     ),
                   );
@@ -118,7 +121,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      const SizedBox(width: 10), // Space between title and button
+                      const SizedBox(
+                          width: 10), // Space between title and button
                       ElevatedButton(
                         onPressed: () {
                           // Add action for 'BUY' button
@@ -147,8 +151,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   const SizedBox(height: 8),
                   Text(
                     widget.description,
-                    style: const TextStyle(
-                        fontSize: 16, color: Colors.black54),
+                    style: const TextStyle(fontSize: 16, color: Colors.black54),
                   ),
                 ],
               ),
@@ -220,12 +223,11 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               const SizedBox(height: 16),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
-                    // Add action for 'Call' button
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.lightGreen,
-                    padding: const EdgeInsets.symmetric(horizontal: 92, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 92, vertical: 12),
                   ),
                   child: const Text(
                     'Call',
