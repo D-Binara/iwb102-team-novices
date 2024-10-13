@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Profile/Post.dart';
+import 'package:frontend/screens/Profile/Add_Post.dart';
 import 'package:frontend/screens/Profile/Profile_Details.dart';
 
 class Profile extends StatelessWidget {
@@ -18,21 +18,29 @@ class Profile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start, // Align buttons to the left
           children: [
             // Top Section: Single Circle Centered
+            // Top Section: Single Circle Centered
             Center(
-              child: CircleAvatar(
-                radius: 80, // Circle size
-                backgroundColor: Colors.green[200], // Circle color
-                child: const Text(
-                  'Profile', // Example text inside the circle
-                  style: TextStyle(color: Colors.white, fontSize: 30),
+              child: Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(color: Colors.green, width: 2), // Add border with width 2
+                ),
+                child: CircleAvatar(
+                  radius: 80, // Circle size
+                  backgroundColor: Colors.green[200], // Circle color
+                  child: const Text(
+                    'Profile', // Example text inside the circle
+                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  ),
                 ),
               ),
             ),
+
             const SizedBox(height: 20),
 
             // Centering the Profile Details Text
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 "Profile Details",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
@@ -48,7 +56,7 @@ class Profile extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ProfileDetails()),
+                      MaterialPageRoute(builder: (context) => const ProfileDetails()),
                     );                  },
                   icon: const Icon(Icons.person), // Icon on the left side
                   label: const Text(
@@ -66,10 +74,10 @@ class Profile extends StatelessWidget {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Post()),
+                      MaterialPageRoute(builder: (context) => const AddPost()),
                     );
                   },
-                  icon: const Icon(Icons.favorite), // Icon on the left side
+                  icon: const Icon(Icons.post_add_rounded), // Icon on the left side
                   label: const Text(
                     "Your Post",
                     style: TextStyle(fontSize: 18),
@@ -85,9 +93,9 @@ class Profile extends StatelessWidget {
                   onPressed: () {
                     // Handle Hello button press
                   },
-                  icon: const Icon(Icons.message), // Icon on the left side
+                  icon: const Icon(Icons.settings), // Icon on the left side
                   label: const Text(
-                    "Hello",
+                    "Setting",
                     style: TextStyle(fontSize: 18),
                   ),
                   style: TextButton.styleFrom(

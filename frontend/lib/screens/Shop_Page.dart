@@ -28,7 +28,7 @@ class ShopPage extends StatelessWidget {
               // Expanded List of Items
               Expanded(
                 child: ListView(
-                  children: [
+                  children: const [
                     ShopItemCard(
                       images: [
                         'assets/Landing/onboarding_1.png',
@@ -40,7 +40,7 @@ class ShopPage extends StatelessWidget {
                       price: '6 USD',
                       description: 'Fresh and juicy mangoes from Deniyaya.', // Description added
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     ShopItemCard(
                       images: [
                         'assets/Landing/onboarding_1.png',
@@ -52,7 +52,7 @@ class ShopPage extends StatelessWidget {
                       price: '4 USD',
                       description: 'Ripe bananas, perfect for smoothies.', // Description added
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     ShopItemCard(
                       images: [
                         'assets/Auth/google.png',
@@ -64,7 +64,7 @@ class ShopPage extends StatelessWidget {
                       price: '10 USD',
                       description: 'Crisp and delicious apples, perfect for snacking.', // Description added
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: 16),
                     ShopItemCard(
                       images: [
                         'assets/Landing/onboarding_1.png',
@@ -102,13 +102,13 @@ class ShopItemCard extends StatelessWidget {
   final String description; // Add a description property
 
   const ShopItemCard({
-    Key? key,
+    super.key,
     required this.images,
     required this.title,
     required this.location,
     required this.price,
     required this.description, // Update constructor to accept description
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
