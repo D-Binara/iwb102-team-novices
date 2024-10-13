@@ -12,13 +12,15 @@ service / on authListener {
             map<anydata>|error jsonMap = reqBody.cloneWithType();
 
             if (jsonMap is map<anydata>) {
-                string|error username = jsonMap.get("username").toString();
+                string|error firstname = jsonMap.get("firstname").toString();
+                string|error lastname = jsonMap.get("lastname").toString();
+                string|error email = jsonMap.get("email").toString();
                 string|error password = jsonMap.get("password").toString();
 
-                if (username is error || password is error) {
+                if (firstname is error || lastname is error || email is error || password is error) {
                     check caller->respond({message: "Invalid username or password"});
                 } else {
-                    int userId = check registerUser(username, password);
+                    int userId = check registerUser(firstname, lastname , email, password);
                     json response = {message: "User registered successfully", user_id: userId};
                     check caller->respond(response);
                 }
@@ -37,9 +39,9 @@ service / on authListener {
             map<anydata>|error jsonMap = reqBody.cloneWithType();
 
             if (jsonMap is map<anydata>) {
-                string username = jsonMap.get("username").toString();
+                string email = jsonMap.get("email").toString();
                 string password = jsonMap.get("password").toString();
-                string message = check loginUser(username, password);
+                string message = check loginUser(email, password);
                 json response = {message: message};
                 check caller->respond(response);
             } else {
