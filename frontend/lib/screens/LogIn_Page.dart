@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Register_Page.dart';
-import 'Home_Page.dart'; // Import your RegisterPage
+import 'package:frontend/services/auth_service.dart';
+import 'Home_Page.dart'; // Import HomePage after successful login
 
 class LogInPage extends StatefulWidget {
   const LogInPage({super.key});
@@ -10,11 +11,12 @@ class LogInPage extends StatefulWidget {
 }
 
 class _LogInPageState extends State<LogInPage> {
-  // State variable to control password visibility
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
-
-  // State variable to control checkbox
   bool _isChecked = false;
+
+  final AuthService _authService = AuthService(); // Initialize AuthService
 
   @override
   Widget build(BuildContext context) {
@@ -34,24 +36,18 @@ class _LogInPageState extends State<LogInPage> {
               unselectedLabelColor: Colors.black,
               tabs: [
                 Tab(
-                  child: Text(
-                    'Login',
-                    style: TextStyle(fontSize: 16), // Change the font size here
-                  ),
+                  child: Text('Login', style: TextStyle(fontSize: 16)),
                 ),
                 Tab(
-                  child: Text(
-                    'Register',
-                    style: TextStyle(fontSize: 16), // Change the font size here
-                  ),
+                  child: Text('Register', style: TextStyle(fontSize: 16)),
                 ),
               ],
             ),
           ),
           body: TabBarView(
             children: [
-              buildLoginForm(context), // This is your login form
-              const RegisterPage(), // Replace the center text with RegisterPage
+              buildLoginForm(context),
+              const RegisterPage(),
             ],
           ),
         ),
@@ -67,51 +63,34 @@ class _LogInPageState extends State<LogInPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 20),
-            const Text(
-              'Sign In',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
+            const Text('Sign In', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
             TextField(
-              keyboardType: TextInputType.emailAddress, // Sets the input type to email
-              autocorrect: false, // Disable autocorrect for email input
-              textInputAction: TextInputAction.next, // Allows moving to the next input field
+              controller: _emailController,
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
                 labelText: 'Email',
-                labelStyle: const TextStyle(color: Colors.grey), // Default label color
+                labelStyle: const TextStyle(color: Colors.grey),
                 contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.black), // Default border color
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.green), // Focused border color
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.greenAccent), // Focused error border color
+                  borderSide: const BorderSide(color: Colors.green),
                 ),
               ),
             ),
             const SizedBox(height: 15),
             TextField(
-              obscureText: !_isPasswordVisible, // Toggle password visibility
+              controller: _passwordController,
+              obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
                 labelText: 'Password',
-                labelStyle: const TextStyle(color: Colors.grey), // Default label color
+                labelStyle: const TextStyle(color: Colors.grey),
                 contentPadding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.black), // Default border color
-                ),
+                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.green), // Focused border color
-                ),
-                focusedErrorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(color: Colors.green), // Focused error border color
+                  borderSide: const BorderSide(color: Colors.green),
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
@@ -120,7 +99,7 @@ class _LogInPageState extends State<LogInPage> {
                   ),
                   onPressed: () {
                     setState(() {
-                      _isPasswordVisible = !_isPasswordVisible; // Toggle visibility
+                      _isPasswordVisible = !_isPasswordVisible;
                     });
                   },
                 ),
@@ -133,102 +112,62 @@ class _LogInPageState extends State<LogInPage> {
                 Row(
                   children: [
                     Checkbox(
-                      value: _isChecked, // Use the state variable for checkbox
+                      value: _isChecked,
                       onChanged: (value) {
                         setState(() {
-                          _isChecked = value!; // Update the checkbox state
+                          _isChecked = value!;
                         });
                       },
-                      activeColor: Colors.green, // Set the checkbox color to green
+                      activeColor: Colors.green,
                     ),
                     const Text('Remember Me'),
                   ],
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text(
-                    'Forgot password?',
-                    style: TextStyle(color: Colors.green),
-                  ),
+                  child: const Text('Forgot password?', style: TextStyle(color: Colors.green)),
                 ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("Don't have an account? Click Register"),
               ],
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const HomePage()),
+              onPressed: () async {
+                String email = _emailController.text;
+                String password = _passwordController.text;
+
+                var response = await _authService.loginUser(
+                  email: email,
+                  password: password,
                 );
+
+                if (response['success']) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomePage()),
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(response['message'])),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.green,
                 minimumSize: const Size(double.infinity, 50),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
-              child: const Text(
-                'Login',
-                style: TextStyle(color: Colors.white, fontSize: 18),
-              ),
+              child: const Text('Login', style: TextStyle(color: Colors.white, fontSize: 18)),
             ),
-            const SizedBox(height: 40),
-            const Row(
-              children: [
-                Expanded(child: Divider()),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text('OR', style: TextStyle(color: Colors.grey)),
-                ),
-                Expanded(child: Divider()),
-              ],
-            ),
-            const SizedBox(height: 40),
-            buildSocialLoginButton('LogIn with Google', 'assets/Auth/google.png', Colors.white),
           ],
         ),
       ),
     );
   }
 
-  Widget buildSocialLoginButton(String text, String logoAsset, Color bgColor) {
-    return Container(
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2), // Dark shadow color with opacity
-            spreadRadius: 2, // Spread radius of the shadow
-            blurRadius: 6, // Blur radius for the shadow softness
-            offset: const Offset(0, 3), // Offset for the shadow
-          ),
-        ],
-        borderRadius: BorderRadius.circular(10), // Same border radius as the button
-      ),
-      child: ElevatedButton.icon(
-        onPressed: () {},
-        icon: Image.asset(logoAsset, height: 20), // Set your logo here
-        label: Text(
-          text,
-          style: TextStyle(
-            color: bgColor == Colors.white ? Colors.black : Colors.white,
-          ),
-        ),
-        style: ElevatedButton.styleFrom(
-          backgroundColor: bgColor,
-          minimumSize: const Size(double.infinity, 50),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-      ),
-    );
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }
