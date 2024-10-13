@@ -174,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => LogInPage()), // Navigate to LogIn_Page
+                        MaterialPageRoute(builder: (context) => const LogInPage()), // Navigate to LogIn_Page
                       );
                     },
                     child: const Text(

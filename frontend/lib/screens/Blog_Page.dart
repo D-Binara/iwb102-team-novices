@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/components/NavBar.dart';
 
 class BlogPage extends StatelessWidget {
   const BlogPage({super.key});

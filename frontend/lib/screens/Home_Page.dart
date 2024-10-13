@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Shop_Page.dart';
-import '../components/NavBar.dart';
+import 'package:frontend/screens/Profile_Page.dart';
 import '../components/SearchBar.dart';
 
 class HomePage extends StatelessWidget {
@@ -41,7 +40,10 @@ class HomePage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Profile()),
+                      );
                     },
                     child: const Text('See all'),
                   ),
@@ -75,9 +77,9 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 40),
 
               // Recommended Section
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Recommended',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:frontend/screens/LogIn_Page.dart'; // For Timer
 
 class LandingPage extends StatefulWidget {
@@ -233,10 +232,10 @@ class _SecondScreenState extends State<SecondScreen>
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black,
-                        offset: const Offset(0, 4),
+                        offset: Offset(0, 4),
                         blurRadius: 6,
                         spreadRadius: 2,
                       ),

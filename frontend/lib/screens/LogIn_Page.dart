@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Register_Page.dart';
-
 import 'Home_Page.dart'; // Import your RegisterPage
 
 class LogInPage extends StatefulWidget {
@@ -155,9 +154,9 @@ class _LogInPageState extends State<LogInPage> {
               ],
             ),
             const SizedBox(height: 20),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Text("Don't have an account? Click Register"),
               ],
             ),
@@ -166,7 +165,7 @@ class _LogInPageState extends State<LogInPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(builder: (context) => const HomePage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -182,8 +181,8 @@ class _LogInPageState extends State<LogInPage> {
               ),
             ),
             const SizedBox(height: 40),
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Expanded(child: Divider()),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 10),

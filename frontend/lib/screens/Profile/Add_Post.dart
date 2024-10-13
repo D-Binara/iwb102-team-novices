@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Profile/All_Post.dart';
 import 'package:image_picker/image_picker.dart';
@@ -99,9 +100,11 @@ class _AddPostState extends State<AddPost> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AllPost()),
+                  MaterialPageRoute(builder: (context) => const AllPost()),
                 );
-                print("See All Post tapped");
+                if (kDebugMode) {
+                  print("See All Post tapped");
+                }
               },
               child: const Text(
                 "See All Post",
@@ -196,7 +199,7 @@ class _AddPostState extends State<AddPost> {
                       width: 2.0, // Border width
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: 10.0, // Adjust vertical padding for height
                     horizontal: 20.0, // Adjust horizontal padding for width
                   ),
@@ -218,7 +221,6 @@ class _AddPostState extends State<AddPost> {
                 ],
                 onChanged: (value) {
                   setState(() {
-                    var selectedCategory = value; // Update the selected category
                   });
                 },
               ),
@@ -236,7 +238,7 @@ class _AddPostState extends State<AddPost> {
                       width: 2.0, // Border width
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: 10.0, // Adjust vertical padding for height
                     horizontal: 20.0, // Adjust horizontal padding for width
                   ),
@@ -273,7 +275,7 @@ class _AddPostState extends State<AddPost> {
                       width: 2.0, // Border width
                     ),
                   ),
-                  contentPadding: const EdgeInsets.symmetric(
+                  contentPadding: EdgeInsets.symmetric(
                     vertical: 10.0, // Adjust vertical padding for height
                     horizontal: 20.0, // Adjust horizontal padding for width
                   ),
