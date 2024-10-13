@@ -8,13 +8,13 @@ class CustomSearchBar extends StatelessWidget {
         color: Colors.grey[200], // Background color
         borderRadius: BorderRadius.circular(20), // Rounded corners
       ),
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: TextField(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: const TextField(
         decoration: InputDecoration(
           // Search icon
           hintText: 'Search in here',
           border: InputBorder.none,
-          suffixIcon: const Icon(Icons.search),// Remove underline
+          suffixIcon: Icon(Icons.search),// Remove underline
         ),
       ),
     );

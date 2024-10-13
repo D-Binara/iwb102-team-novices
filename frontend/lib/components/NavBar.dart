@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../screens/Blog_Page.dart';
 import '../screens/Home_Page.dart';
 import '../screens/Shop_Page.dart';
@@ -17,10 +16,11 @@ class _NavBarState extends State<NavBar> {
 
   // List of pages to navigate to, including the ProfilePage
   final List<Widget> _pages = [
-    HomePage(),
-    ShopPage(),
-    BlogPage(),
-    Profile()
+    const HomePage(),
+    const ShopPage(),
+    const BlogPage(),
+    const Profile()
+
 
   ];
 
