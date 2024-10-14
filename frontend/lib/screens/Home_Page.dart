@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Profile_Page.dart';
+import '../components/NavBar.dart';
 import '../components/SearchBar.dart';
 
 class HomePage extends StatelessWidget {
@@ -42,7 +43,8 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Profile()),
+                        MaterialPageRoute(
+                            builder: (context) => const Profile()),
                       );
                     },
                     child: const Text('See all'),
@@ -125,6 +127,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: const NavBar(), // Add the NavBar here
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../components/NavBar.dart';
 import '../components/SearchBar.dart'; // Ensure this component is correctly implemented
 import 'item_detail.dart'; // Import the item detail page
 
@@ -89,6 +90,7 @@ class ShopPage extends StatelessWidget {
           },
           child: const Icon(Icons.add, color: Colors.white),
         ),
+        bottomNavigationBar: const NavBar(),
       ),
     );
   }
