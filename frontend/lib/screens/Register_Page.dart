@@ -76,11 +76,11 @@ class _RegisterPageState extends State<RegisterPage> {
       },
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 50),
               const Text(
                 'Register',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
