@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/Profile/Add_Post.dart';
+import '../components/NavBar.dart';
 import '../components/SearchBar.dart'; // Ensure this component is correctly implemented
 import 'item_detail.dart'; // Import the item detail page
 
@@ -14,11 +16,11 @@ class ShopPage extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Shop'),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.green,
           foregroundColor: Colors.black,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
               CustomSearchBar(), // Include the SearchBar widget
@@ -85,10 +87,15 @@ class ShopPage extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.green,
           onPressed: () {
-            // Add action for the floating button
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const AddPost()),
+            );
           },
           child: const Icon(Icons.add, color: Colors.white),
         ),
+        bottomNavigationBar: const NavBar(),
       ),
     );
   }
