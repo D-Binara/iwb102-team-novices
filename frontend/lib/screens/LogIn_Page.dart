@@ -58,11 +58,11 @@ class _LogInPageState extends State<LogInPage> {
   Widget buildLoginForm(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.all(25.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const SizedBox(height: 20),
+            const SizedBox(height: 50),
             const Text('Sign In', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
             const SizedBox(height: 20),
             TextField(
@@ -127,6 +127,13 @@ class _LogInPageState extends State<LogInPage> {
                   onPressed: () {},
                   child: const Text('Forgot password?', style: TextStyle(color: Colors.green)),
                 ),
+              ],
+            ),
+            SizedBox(height: 50,),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account? Click Register"),
               ],
             ),
             const SizedBox(height: 20),
