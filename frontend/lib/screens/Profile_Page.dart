@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:frontend/screens/Profile/Add_Post.dart';
 import 'package:frontend/screens/Profile/Profile_Details.dart';
 
+import '../components/NavBar.dart';
+
+
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
@@ -91,7 +94,7 @@ class Profile extends StatelessWidget {
                 // Button 3: Hello
                 TextButton.icon(
                   onPressed: () {
-                    // Handle Hello button press
+
                   },
                   icon: const Icon(Icons.settings), // Icon on the left side
                   label: const Text(
@@ -107,6 +110,8 @@ class Profile extends StatelessWidget {
           ],
         ),
       ),
+        bottomNavigationBar: const NavBar(), // Add the NavBar here
+
     );
   }
 }

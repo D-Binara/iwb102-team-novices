@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/components/NavBar.dart';
+
+import '../components/NavBar.dart';
 
 class BlogPage extends StatelessWidget {
   const BlogPage({super.key});
@@ -86,6 +87,7 @@ class BlogPage extends StatelessWidget {
           ),
         ],
       ),
+      bottomNavigationBar: const NavBar(),
     );
   }
 }
