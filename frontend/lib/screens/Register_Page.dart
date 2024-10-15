@@ -90,9 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
       );
 
       if (response['success']) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(response['message'])),
-        );
+        // Removed SnackBar that shows a message at the bottom
         _showSuccessDialog(); // Show success dialog
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -271,14 +269,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please confirm your password';
-                    } else if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
                     } else if (value != _passwordController.text) {
-                      return 'Please enter the same password';
+                      return 'Passwords do not match';
                     }
                     return null;
                   },
                 ),
+
                 const SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -314,7 +311,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: TextStyle(color: Colors.white, fontSize: 18),
                   ),
                 ),
-                const SizedBox(height: 40),
               ],
             ),
           ),
