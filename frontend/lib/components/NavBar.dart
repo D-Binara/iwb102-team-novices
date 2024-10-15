@@ -11,16 +11,15 @@ class NavBar extends StatefulWidget {
   State<NavBar> createState() => _NavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
-  int _selectedIndex = 0;
+int _selectedIndex = 0;
 
-  // Handle navigation when a tab is clicked
+class _NavBarState extends State<NavBar> {
+  
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; // Update the selected index
+      _selectedIndex = index; 
     });
 
-    // Handle navigation based on the selected index
     switch (index) {
       case 0:
         Navigator.pushReplacement(
@@ -52,10 +51,10 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _selectedIndex, // Set the current index based on the state
+      currentIndex: _selectedIndex, 
       onTap: _onItemTapped,
-      selectedItemColor: Colors.green, // Green color for selected items
-      unselectedItemColor: Colors.black, // Black color for unselected items
+      selectedItemColor: Colors.green, 
+      unselectedItemColor: Colors.black, 
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

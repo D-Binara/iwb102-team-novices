@@ -45,7 +45,7 @@ class AuthService {
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return {'success': true, 'message': 'Login successful', 'data': jsonDecode(response.body)};
     } else {
       return {'success': false, 'message': 'Login failed: ${response.body}'};
