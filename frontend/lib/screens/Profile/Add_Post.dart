@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Home_Page.dart';
+import 'package:frontend/components/NavBar.dart';
+import 'package:frontend/screens/Profile/Your_Post.dart';
 import 'package:frontend/services/item_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -24,7 +25,7 @@ class _AddPostState extends State<AddPost> {
   String? selectedCategory;
 
   final ItemService apiService = ItemService(
-      'http://192.168.8.186:8080'); // Update with actual backend URL
+      'http://172.20.10.7:8080'); // Update with actual backend URL
 
   // Pick image from gallery
   Future<void> _pickImage(int index) async {
@@ -69,12 +70,45 @@ class _AddPostState extends State<AddPost> {
         }
 
         // Show success message
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Post added successfully!')),
-        );
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const HomePage()),
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Center(
+                child: Text(
+                  'Add Successful',
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 25),
+                ),
+              ),
+              content: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.5, // 50% of screen width
+                height: MediaQuery.of(context).size.height * 0.03, // 10% of screen height
+                child: const Center(
+                  child: Text(
+                    'Thank you for your Post',
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              actions: [
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const AddPost()),
+                      );
+                    },
+                    child: const Text(
+                      'OK',
+                      style: TextStyle(color: Colors.green),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
         );
       } else {
         // Handle error
@@ -97,6 +131,22 @@ class _AddPostState extends State<AddPost> {
           backgroundColor: Colors.green,
           title: const Text("Post"),
           elevation: 0,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const YourPost()),
+                );
+              },
+              child: const Text(
+                "Your Post",
+                style: TextStyle(
+                  color: Colors.white, // Text color
+                ),
+              ),
+            ),
+          ],
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
@@ -131,22 +181,22 @@ class _AddPostState extends State<AddPost> {
                           border: Border.all(color: Colors.green, width: 2),
                           borderRadius: BorderRadius.circular(8),
                           color:
-                              images[index] == null ? Colors.green[200] : null,
+                          images[index] == null ? Colors.green[200] : null,
                           image: images[index] != null
                               ? DecorationImage(
-                                  image: FileImage(images[index]!),
-                                  fit: BoxFit.cover,
-                                )
+                            image: FileImage(images[index]!),
+                            fit: BoxFit.cover,
+                          )
                               : null,
                         ),
                         child: images[index] == null
                             ? const Center(
-                                child: Icon(
-                                  Icons.add_box_rounded,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
-                              )
+                          child: Icon(
+                            Icons.add_box_rounded,
+                            color: Colors.white,
+                            size: 50,
+                          ),
+                        )
                             : null,
                       ),
                     );
@@ -157,7 +207,12 @@ class _AddPostState extends State<AddPost> {
                   controller: _nameController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Product name',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder( // Green border when focused
+                      borderSide: BorderSide(color: Colors.green),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -170,7 +225,12 @@ class _AddPostState extends State<AddPost> {
                 DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Category',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder( // Green border when focused
+                      borderSide: BorderSide(color: Colors.green),
+                    ),
                   ),
                   value: selectedCategory,
                   items: const [
@@ -204,7 +264,12 @@ class _AddPostState extends State<AddPost> {
                   controller: _locationController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Location',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder( // Green border when focused
+                      borderSide: BorderSide(color: Colors.green),
+                    ),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -219,7 +284,17 @@ class _AddPostState extends State<AddPost> {
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Product details',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder( // Green border when focused
+                      borderSide: BorderSide(color: Colors.green),
+                    ),
                   ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter product details';
+                    }
+                    return null;
+                  },
                   maxLines: 3,
                 ),
                 const SizedBox(height: 10),
@@ -227,7 +302,12 @@ class _AddPostState extends State<AddPost> {
                   controller: _priceController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Price',
+                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    labelText: 'Price (USD)',
+                    labelStyle: TextStyle(color: Colors.black),
+                    focusedBorder: OutlineInputBorder( // Green border when focused
+                      borderSide: BorderSide(color: Colors.green),
+                    ),
                   ),
                   keyboardType: TextInputType.number,
                   validator: (value) {
@@ -238,17 +318,24 @@ class _AddPostState extends State<AddPost> {
                   },
                 ),
                 const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
+                Center(
+                  child: ElevatedButton(
+                    onPressed: _submitForm,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.green, // Button color
+                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 100), // Button padding
+                    ),
+                    child: const Text(
+                      'Post',
+                      style: TextStyle(color: Colors.white), // Set text color to white
+                    ),
                   ),
-                  child: const Text('Submit'),
-                ),
+                )
               ],
             ),
           ),
         ),
+        bottomNavigationBar: const NavBar(),
       ),
     );
   }
