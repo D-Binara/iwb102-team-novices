@@ -57,7 +57,7 @@ service / on authListener {
 
     // Items functions
     resource function post items/add(http:Caller caller, http:Request req) returns error? {
-        json|error reqBody = req.getContentType();
+        json|error reqBody = req.getJsonPayload();
 
         if (reqBody is json) {
             map<anydata>|error jsonMap = reqBody.cloneWithType();
@@ -115,8 +115,4 @@ service / on authListener {
         return "No file found in the request.";
     }
 
-    resource function get id() returns error|Item {
-        Item|error itemId = getItemId();
-        return itemId;
-    }
 }
