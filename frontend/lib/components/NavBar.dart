@@ -14,10 +14,9 @@ class NavBar extends StatefulWidget {
 int _selectedIndex = 0;
 
 class _NavBarState extends State<NavBar> {
-  
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index; 
+      _selectedIndex = index;
     });
 
     switch (index) {
@@ -50,29 +49,41 @@ class _NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex, 
-      onTap: _onItemTapped,
-      selectedItemColor: Colors.green, 
-      unselectedItemColor: Colors.black, 
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.store),
-          label: 'Shop',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.article_outlined),
-          label: 'Blog',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.person),
-          label: 'Profile',
-        ),
-      ],
+    return Container(
+      decoration: const BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.lightGreen, // Green shadow color
+            blurRadius: 8, // Spread of the shadow
+            offset: Offset(0, -2), // Shadow offset (negative y-axis to show above the bar)
+          ),
+        ],
+      ),
+      child: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.black,
+        type: BottomNavigationBarType.fixed,  // Always show the labels
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.store),
+            label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.article_outlined),
+            label: 'Blog',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }
