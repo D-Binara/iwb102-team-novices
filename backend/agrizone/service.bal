@@ -115,4 +115,9 @@ service / on authListener {
         return "No file found in the request.";
     }
 
+    resource function get item/get(http:Request req) returns anydata[]|error {
+    anydata[]|error item = getItem() ;
+       return item;
+    }
+
 }
