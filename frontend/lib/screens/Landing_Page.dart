@@ -68,7 +68,7 @@ class _LandingPageState extends State<LandingPage>
                       style: TextStyle(color: Colors.black),
                     ),
                     TextSpan(
-                      text: 'Market',
+                      text: 'Zone',
                       style: TextStyle(color: Colors.green),
                     ),
                   ],
@@ -141,17 +141,6 @@ class _SecondScreenState extends State<SecondScreen>
         curve: Curves.easeInOut,
       );
     });
-
-    // Set a timer to navigate to the login page after 6 seconds
-    Timer(const Duration(seconds: 15), () {
-      // Cancel the sliding timer
-      _timer.cancel();
-      // Navigate to the LoginPage
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LogInPage()),
-      );
-    });
   }
 
   @override
@@ -190,7 +179,7 @@ class _SecondScreenState extends State<SecondScreen>
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            'assets/Landing/onboarding_1.png',
+                            'assets/Landing/onboarding_3.jpeg',
                             fit: BoxFit.cover,
                           ),
                         ],
@@ -200,7 +189,7 @@ class _SecondScreenState extends State<SecondScreen>
 
                     // Title text
                     Text(
-                      'Welcome to Agriplant',
+                      'Welcome to AgriZone',
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
