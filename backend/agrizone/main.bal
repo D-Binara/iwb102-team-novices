@@ -14,7 +14,7 @@ public type User record {|
 public type Item record {|
     int item_id?;
     string item_name;
-    int item_quentity;
+    int item_quantity;
     int item_price;
     string item_category;
     string item_image;
@@ -79,12 +79,25 @@ isolated function addItem(string item_name, int item_quantity, int item_price, s
     }
 }
 
-isolated function getItemId( ) returns Item|error {
-
+isolated function getItemId() returns Item|error {
     Item item_id = check dbClient->queryRow(
-       `SELECT item_id FROM items ORDER BY item_id DESC LIMIT 1`
+        `SELECT item_id FROM items ORDER BY item_id DESC LIMIT 1`
     );
-   return item_id;
-   
+    return item_id;
+}
+
+isolated function getItem() returns anydata[]|error {
+    sql:ParameterizedQuery query = `SELECT * FROM items`;
+
+    anydata[] detailsArray = [];
+
+    stream<record {}, sql:Error?> resultStream = dbClient->query(query);
+
+    check from record {} item in resultStream
+        do {
+            detailsArray.push(item);
+        };
+
+    return detailsArray;
 }
 
