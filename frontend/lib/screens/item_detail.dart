@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Profile_Page.dart';
 
 class ItemDetailPage extends StatefulWidget {
   final String title;
@@ -10,13 +9,13 @@ class ItemDetailPage extends StatefulWidget {
   final String description;
 
   const ItemDetailPage({
-    Key? key,
+    super.key,
     required this.title,
     required this.location,
     required this.price,
     required this.images,
     required this.description,
-  }) : super(key: key);
+  });
 
   @override
   _ItemDetailPageState createState() => _ItemDetailPageState();
@@ -65,7 +64,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: 300,
                 child: PageView.builder(
                   controller: _pageController,
@@ -156,8 +155,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 ],
               ),
               const SizedBox(height: 16),
-              Row(
-                children: const [
+              const Row(
+                children: [
                   Expanded(
                     child: Divider(
                       color: Colors.black,
@@ -167,9 +166,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 ],
               ),
               const SizedBox(height: 16),
-              Align(
+              const Align(
                 alignment: Alignment.centerLeft,
-                child: const Text(
+                child: Text(
                   "CONTACT THE SELLER",
                   style: TextStyle(
                     fontSize: 20,
@@ -194,7 +193,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                             color: Colors.black.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(2, 2),
+                            offset: const Offset(2, 2),
                           ),
                         ],
                       ),

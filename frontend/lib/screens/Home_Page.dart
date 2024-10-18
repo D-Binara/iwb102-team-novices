@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Shop_Page.dart';
+import 'package:frontend/screens/Profile_Page.dart';
 import '../components/NavBar.dart';
 import '../components/SearchBar.dart';
 
@@ -13,13 +13,17 @@ class HomePage extends StatelessWidget {
         FocusScope.of(context).unfocus();
       },
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.green,
+          elevation: 0,
+        ),
         body: Padding(
-          padding: const EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
               // Add margin top to Search Bar with + icon
               Container(
-                margin: const EdgeInsets.only(top: 80), // Add top margin
+                margin: const EdgeInsets.only(top: 10), // Add top margin
                 child: Row(
                   children: [
                     // Search Bar
@@ -29,21 +33,15 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 30),
 
               // Categories Section
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Shop by category',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      // Handle 'See all' button press
-                    },
-                    child: const Text('See all'),
                   ),
                 ],
               ),
@@ -75,9 +73,9 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 40),
 
               // Recommended Section
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
                     'Recommended',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -123,6 +121,7 @@ class HomePage extends StatelessWidget {
             ],
           ),
         ),
+        bottomNavigationBar: const NavBar(), // Add the NavBar here
       ),
     );
   }

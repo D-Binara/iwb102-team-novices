@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:frontend/screens/LogIn_Page.dart'; // For Timer
 
 class LandingPage extends StatefulWidget {
@@ -69,7 +68,7 @@ class _LandingPageState extends State<LandingPage>
                       style: TextStyle(color: Colors.black),
                     ),
                     TextSpan(
-                      text: 'Market',
+                      text: 'Zone',
                       style: TextStyle(color: Colors.green),
                     ),
                   ],
@@ -142,17 +141,6 @@ class _SecondScreenState extends State<SecondScreen>
         curve: Curves.easeInOut,
       );
     });
-
-    // Set a timer to navigate to the login page after 6 seconds
-    Timer(const Duration(seconds: 15), () {
-      // Cancel the sliding timer
-      _timer.cancel();
-      // Navigate to the LoginPage
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LogInPage()),
-      );
-    });
   }
 
   @override
@@ -187,11 +175,11 @@ class _SecondScreenState extends State<SecondScreen>
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            'assets/Landing/onboarding_1.png',
+                            'assets/Landing/onboarding_2.png',
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            'assets/Landing/onboarding_1.png',
+                            'assets/Landing/onboarding_3.jpeg',
                             fit: BoxFit.cover,
                           ),
                         ],
@@ -201,7 +189,7 @@ class _SecondScreenState extends State<SecondScreen>
 
                     // Title text
                     Text(
-                      'Welcome to Agriplant',
+                      'Welcome to AgriZone',
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge
@@ -233,10 +221,10 @@ class _SecondScreenState extends State<SecondScreen>
                   decoration: BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                         color: Colors.black,
-                        offset: const Offset(0, 4),
+                        offset: Offset(0, 4),
                         blurRadius: 6,
                         spreadRadius: 2,
                       ),
