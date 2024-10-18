@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class AllPost extends StatelessWidget {
-  const AllPost({super.key});
+class YourPost extends StatelessWidget {
+  const YourPost({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('All Products'),
+        backgroundColor: Colors.green,
+        title: const Text("Your All Post"),
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -75,7 +77,7 @@ class AllPost extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: const Text('BUY',
+                      child: const Text('Delete',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
