@@ -79,6 +79,13 @@ service / on authListener {
 
                     if (item_name is string && quantity is int && price is int && item_category is string && item_image is string && location is string && details is string) {
                         int itemId = check addItem(item_name, quantity, price, item_category, item_image, location, details);
+
+                        if item_image == "" {
+                            item_image = ".files/" + itemId.toString() + ".png";
+                        }
+
+                        check updateItemImagePath(itemId, check item_image);
+
                         json response = {message: "Add item successfully", item_id: itemId};
                         check caller->respond(response);
                     } else {
@@ -116,8 +123,90 @@ service / on authListener {
     }
 
     resource function get item/get(http:Request req) returns anydata[]|error {
-    anydata[]|error item = getItem() ;
-       return item;
+        anydata[]|error item = getItem();
+        return item;
+    }
+
+    resource function get item/serveImage(http:Caller caller, http:Request req) returns error? {
+        string? imagePath = req.getQueryParamValue("image_path");
+
+        if imagePath is string {
+            string fullImagePath = "./files/" + imagePath;
+
+            (byte[] & readonly)|io:Error imageBytes = io:fileReadBytes(fullImagePath);
+
+            if imageBytes is byte[] {
+                mime:Entity mediaEntity = new;
+                mediaEntity.setByteArray(imageBytes);
+
+                mime:InvalidContentTypeError? contentType = mediaEntity.setContentType(mime:IMAGE_PNG);
+
+                http:Response res = new;
+                res.setEntity(mediaEntity);
+
+                check caller->respond(res);
+            } else {
+                http:Response res = new;
+                res.statusCode = 404;
+                res.setPayload("Image not found");
+                check caller->respond(res);
+            }
+        } else {
+            http:Response res = new;
+            res.statusCode = 400;
+            res.setPayload("Image path not provided");
+            check caller->respond(res);
+        }
+    }
+
+    //itemID
+    resource function get items/serveImage(http:Request req) returns anydata[]|error {
+        anydata[]|error item = getItemIds();
+        return item;
+    }
+
+    resource function get items/serveImages(http:Caller caller, http:Request req) returns error? {
+        anydata[]|error items = getItemIds();
+
+        if items is error {
+            http:Response res = new;
+            res.statusCode = 500;
+            res.setPayload("Failed to retrieve item IDs");
+            check caller->respond(res);
+            return;
+        }
+
+        mime:Entity[] bodyParts = [];
+
+        foreach var itemId in items {
+            if itemId is string {
+                string fullImagePath = "./files/" + itemId + ".png";
+
+                (byte[] & readonly)|io:Error imageBytes = io:fileReadBytes(fullImagePath);
+
+                if imageBytes is byte[] {
+
+                    mime:Entity mediaEntity = new;
+                    mediaEntity.setByteArray(imageBytes);
+
+                    check mediaEntity.setContentType(mime:IMAGE_PNG);
+                    bodyParts.push(mediaEntity);
+                } else {
+                    json errorJson = {item_id: itemId, errors: "Image not found"};
+                    mime:Entity errorEntity = new;
+                    errorEntity.setJson(errorJson);
+                    bodyParts.push(errorEntity);
+                }
+            }
+        }
+
+        mime:Entity parentEntity = new;
+        parentEntity.setBodyParts(bodyParts);
+        check parentEntity.setContentType(mime:MULTIPART_MIXED);
+        http:Response res = new;
+        res.setEntity(parentEntity);
+        check caller->respond(res);
     }
 
 }
+
