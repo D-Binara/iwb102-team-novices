@@ -79,6 +79,14 @@ isolated function addItem(string item_name, int item_quantity, int item_price, s
     }
 }
 
+function updateItemImagePath(int itemId, string imagePath) returns error? {
+
+    sql:ParameterizedQuery updateQuery = `UPDATE items SET item_image = ${imagePath} WHERE item_id = ${itemId}`;
+
+    _ = check dbClient->execute(updateQuery);
+}
+
+//get last item_id
 isolated function getItemId() returns Item|error {
     Item item_id = check dbClient->queryRow(
         `SELECT item_id FROM items ORDER BY item_id DESC LIMIT 1`
@@ -86,6 +94,23 @@ isolated function getItemId() returns Item|error {
     return item_id;
 }
 
+//get all item_ids 
+isolated function getItemIds() returns anydata[]|error {
+    sql:ParameterizedQuery query = `SELECT item_id FROM items`;
+
+    anydata[] itemIdArray = [];
+
+    stream<record {}, sql:Error?> resultStream = dbClient->query(query);
+
+    check from record {} item in resultStream
+        do {
+            itemIdArray.push(item);
+        };
+
+    return itemIdArray;
+}
+
+//get all item details
 isolated function getItem() returns anydata[]|error {
     sql:ParameterizedQuery query = `SELECT * FROM items`;
 
