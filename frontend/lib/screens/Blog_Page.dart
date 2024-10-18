@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import '../components/SearchBar.dart';  // Import your CustomSearchBar widget
 import '../components/NavBar.dart';
 
 class BlogPage extends StatelessWidget {
@@ -9,41 +9,43 @@ class BlogPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.green,
         elevation: 0,
-        title: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: 'Search in here',
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(30.0),
-                borderSide: BorderSide.none,
-              ),
-              fillColor: Colors.grey[200],
-              filled: true,
-            ),
-          ),
-        ),
+        title: const Text("Blog Page", style: TextStyle(color: Colors.black)),
+        iconTheme: const IconThemeData(color: Colors.black), // Ensures back button is visible if needed
       ),
       body: Column(
         children: <Widget>[
-          // Top row for the most viewed items
+          // Search bar at the top
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: CustomSearchBar(), // Add your CustomSearchBar here
+          ),
+          // Most viewed items row
           Container(
-            height: 100,
+            height: 168, // Fixed height to avoid conflicts
             child: ListView(
               scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
               children: <Widget>[
                 MostViewedItem(
                   imageUrl: 'assets/Blog/corn.jpg',
-                  title: 'Vidokezo vya masoko ya mazao ya mahindi',
+                  title: 'Sri Lanka’s Tea Industry and Economic Growth',
                   views: '3344 views',
                 ),
                 MostViewedItem(
                   imageUrl: 'assets/Blog/mango.jpg',
-                  title: 'Kwanini wakulima wabunifu ndio wanahitajika',
+                  title: 'Tourism: Boosting Sri Lanka’s Economy Post-COVID',
+                  views: '9823 views',
+                ),
+                MostViewedItem(
+                  imageUrl: 'assets/Blog/mango.jpg',
+                  title: 'Tourism: Boosting Sri Lanka’s Economy Post-COVID',
+                  views: '9823 views',
+                ),
+                MostViewedItem(
+                  imageUrl: 'assets/Blog/mango.jpg',
+                  title: 'Tourism: Boosting Sri Lanka’s Economy Post-COVID',
                   views: '9823 views',
                 ),
                 MostViewedItem(
@@ -55,8 +57,10 @@ class BlogPage extends StatelessWidget {
               ],
             ),
           ),
-          // List of blog cards
-          Expanded(
+          SizedBox(height: 10), // Add some spacing
+
+          // Blog card list
+          Expanded(  // Use Expanded to allow the ListView to take up the remaining space
             child: ListView(
               padding: const EdgeInsets.all(8.0),
               children: <Widget>[
@@ -73,6 +77,48 @@ class BlogPage extends StatelessWidget {
                   author: 'Jane Smith',
                   date: 'Jan 1, 2022',
                   views: '9823 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
+                  author: 'Alex Kumar',
+                  date: 'Jan 4, 2022',
+                  views: '3344 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
+                  author: 'Alex Kumar',
+                  date: 'Jan 4, 2022',
+                  views: '3344 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
+                  author: 'Alex Kumar',
+                  date: 'Jan 4, 2022',
+                  views: '3344 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
+                  author: 'Alex Kumar',
+                  date: 'Jan 4, 2022',
+                  views: '3344 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
+                  author: 'Alex Kumar',
+                  date: 'Jan 4, 2022',
+                  views: '3344 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
+                  author: 'Alex Kumar',
+                  date: 'Jan 4, 2022',
+                  views: '3344 views',
                 ),
                 BlogCard(
                   imageUrl: 'assets/Blog/pepper.jpg',
