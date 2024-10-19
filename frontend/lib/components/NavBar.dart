@@ -4,6 +4,8 @@ import 'package:frontend/screens/Home_Page.dart';
 import 'package:frontend/screens/Profile_Page.dart';
 import 'package:frontend/screens/Shop_Page.dart';
 
+import '../screens/Profile/Add_Post.dart';
+
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
@@ -35,10 +37,16 @@ class _NavBarState extends State<NavBar> {
       case 2:
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const BlogPage()),
+          MaterialPageRoute(builder: (context) => const AddPost()),
         );
         break;
       case 3:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const BlogPage()),
+        );
+        break;
+      case 4:
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const Profile()),
@@ -73,6 +81,12 @@ class _NavBarState extends State<NavBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.store),
             label: 'Shop',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box_rounded,
+              size: 30.0,
+            ),
+            label: 'Post',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.article_outlined),
