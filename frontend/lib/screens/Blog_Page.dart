@@ -29,29 +29,29 @@ class BlogPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 10.0),
               children: <Widget>[
                 MostViewedItem(
-                  imageUrl: 'assets/Blog/corn.jpg',
-                  title: 'Sri Lanka’s Tea Industry and Economic Growth',
-                  views: '3344 views',
+                  imageUrl: 'assets/Blog/ceylon_tea.jpg',
+                  title: 'Ceylon Tea Prices Surge Amid Global Demand',
+                  views: '4200 views',
                 ),
                 MostViewedItem(
-                  imageUrl: 'assets/Blog/mango.jpg',
-                  title: 'Tourism: Boosting Sri Lanka’s Economy Post-COVID',
-                  views: '9823 views',
-                ),
-                MostViewedItem(
-                  imageUrl: 'assets/Blog/mango.jpg',
-                  title: 'Tourism: Boosting Sri Lanka’s Economy Post-COVID',
-                  views: '9823 views',
-                ),
-                MostViewedItem(
-                  imageUrl: 'assets/Blog/mango.jpg',
-                  title: 'Tourism: Boosting Sri Lanka’s Economy Post-COVID',
-                  views: '9823 views',
+                  imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
+                  title: 'Sri Lanka Rice Prices Stabilize After Harvest Season',
+                  views: '3500 views',
                 ),
                 MostViewedItem(
                   imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  views: '3344 views',
+                  title: 'Sri Lankan Spices: Pepper and Cinnamon Prices',
+                  views: '2900 views',
+                ),
+                MostViewedItem(
+                  imageUrl: 'assets/Blog/vegetables.jpg',
+                  title: 'Vegetable Prices Drop After Local Supply Increase',
+                  views: '3100 views',
+                ),
+                MostViewedItem(
+                  imageUrl: 'assets/Blog/mango.jpg',
+                  title: 'Fruit Exports: Mango and Banana Prices Surge',
+                  views: '2700 views',
                 ),
                 // Add more MostViewedItem widgets as needed
               ],
@@ -60,72 +60,72 @@ class BlogPage extends StatelessWidget {
           SizedBox(height: 10), // Add some spacing
 
           // Blog card list
-          Expanded(  // Use Expanded to allow the ListView to take up the remaining space
+          Expanded(
             child: ListView(
               padding: const EdgeInsets.all(8.0),
               children: <Widget>[
                 BlogCard(
-                  imageUrl: 'assets/Blog/corn.jpg',
-                  title: 'Sheria ina uhusiano gani na kilimo?',
-                  author: 'John Doe',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
+                  imageUrl: 'assets/Blog/ceylon_tea.jpg',
+                  title: 'Ceylon Tea Export Prices Hit Record Highs',
+                  price: 'LKR 1,200/kg',
+                  date: 'Oct 8, 2024',
+                  views: '4200 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
+                  title: 'Local Rice Prices Steady Amid Strong Harvest',
+                  price: 'LKR 110/kg',
+                  date: 'Oct 7, 2024',
+                  views: '3500 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/pepper.jpg',
+                  title: 'Pepper and Cinnamon Prices Rise in 2024',
+                  price: 'LKR 950/kg',
+                  date: 'Oct 6, 2024',
+                  views: '2900 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/cinnamon.jpg',
+                  title: 'Cinnamon Prices in Sri Lanka Continue to Soar',
+                  price: 'LKR 3,500/kg',
+                  date: 'Oct 7, 2024',
+                  views: '3200 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/fish.jpg',
+                  title: 'Fresh Tuna Prices Decline After Increase in Supply',
+                  price: 'LKR 1500/kg',
+                  date: 'Oct 8, 2024',
+                  views: '2500 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/tomato.jpg',
+                  title: 'Tomato Prices Fall Due to High Yield',
+                  price: 'LKR 90/kg',
+                  date: 'Oct 9, 2024',
+                  views: '3100 views',
+                ),
+                BlogCard(
+                  imageUrl: 'assets/Blog/carrot.jpg',
+                  title: 'Carrot Prices Fall Due to High Yield',
+                  price: 'LKR 90/kg',
+                  date: 'Oct 9, 2024',
+                  views: '3100 views',
                 ),
                 BlogCard(
                   imageUrl: 'assets/Blog/mango.jpg',
-                  title: 'Kwanini wakulima wabunifu ndio wanahitajika',
-                  author: 'Jane Smith',
-                  date: 'Jan 1, 2022',
-                  views: '9823 views',
+                  title: 'Mango Exports Reach Record Prices in 2024',
+                  price: 'LKR 200/kg',
+                  date: 'Oct 10, 2024',
+                  views: '2700 views',
                 ),
                 BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
-                ),
-                BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
-                ),
-                BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
-                ),
-                BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
-                ),
-                BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
-                ),
-                BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
-                ),
-                BlogCard(
-                  imageUrl: 'assets/Blog/pepper.jpg',
-                  title: 'Mkulima kijana aliyekuza pesa kwa miche ya miti',
-                  author: 'Alex Kumar',
-                  date: 'Jan 4, 2022',
-                  views: '3344 views',
+                  imageUrl: 'assets/Blog/corn.jpg',
+                  title: 'Corn Prices Stable Amid Steady Domestic Demand',
+                  price: 'LKR 120/kg',
+                  date: 'Oct 10, 2024',
+                  views: '2800 views',
                 ),
                 // Add more BlogCard widgets as needed
               ],
@@ -189,14 +189,14 @@ class MostViewedItem extends StatelessWidget {
 class BlogCard extends StatelessWidget {
   final String imageUrl;
   final String title;
-  final String author;
+  final String price; // New field for the price
   final String date;
   final String views;
 
   BlogCard({
     required this.imageUrl,
     required this.title,
-    required this.author,
+    required this.price,
     required this.date,
     required this.views,
   });
@@ -237,6 +237,15 @@ class BlogCard extends StatelessWidget {
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis, // Handle long text
+                  ),
+                  SizedBox(height: 5),
+                  Text(
+                    price, // Display the price here
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(height: 5),
                   Row(
