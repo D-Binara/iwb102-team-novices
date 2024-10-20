@@ -168,6 +168,8 @@ service / on authListener {
     resource function get items/serveImages(http:Caller caller, http:Request req) returns error? {
         anydata[]|error items = getItemIds();
 
+        map<string[]> imagePath = req.getQueryParams();
+
         if items is error {
             http:Response res = new;
             res.statusCode = 500;
@@ -175,35 +177,39 @@ service / on authListener {
             check caller->respond(res);
             return;
         }
-
+        io:print(imagePath);
         mime:Entity[] bodyParts = [];
 
-        foreach var item in items {
-            if item is map<anydata> && item.hasKey("item_id") {
-                var itemId = item["item_id"];
-                if itemId is int || itemId is string {
-                    string fullImagePath = "./files/" + itemId.toString() + ".png";
+        foreach var fileName in imagePath.keys() {
+            io:print("File name from query params: " + fileName);
 
-                    (byte[] & readonly)|io:Error imageBytes = io:fileReadBytes(fullImagePath);
+            foreach var item in items {
+                if item is map<anydata> && item.hasKey("item_id") {
+                    var itemId = item["item_id"];
+                    if itemId is int || itemId is string {
+                        string fullImagePath = "./files/" + fileName;
 
-                    if imageBytes is byte[] {
-                        mime:Entity mediaEntity = new;
-                        mediaEntity.setByteArray(imageBytes);
-                        mime:InvalidContentTypeError? contentType = mediaEntity.setContentType(mime:IMAGE_PNG);
-                        http:Response res = new;
-                        res.setEntity(mediaEntity);
+                        (byte[] & readonly)|io:Error imageBytes = io:fileReadBytes(fullImagePath);
 
-                        check caller->respond(res);
-                    } else {
-                        json errorJson = {item_id: itemId, errors: "Image not found"};
-                        mime:Entity errorEntity = new;
-                        errorEntity.setJson(errorJson);
-                        bodyParts.push(errorEntity);
+                        if imageBytes is byte[] {
+                            mime:Entity mediaEntity = new;
+                            mediaEntity.setByteArray(imageBytes);
+                            mime:InvalidContentTypeError? contentType = mediaEntity.setContentType(mime:IMAGE_PNG);
+                            http:Response res = new;
+                            res.setEntity(mediaEntity);
+
+                            check caller->respond(res);
+                        } else {
+                            // Handle case where the image is not found
+                            json errorJson = {item_id: itemId, errors: "Image not found"};
+                            mime:Entity errorEntity = new;
+                            errorEntity.setJson(errorJson);
+                            bodyParts.push(errorEntity);
+                        }
                     }
                 }
             }
         }
+
     }
-
 }
-
