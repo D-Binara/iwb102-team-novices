@@ -20,56 +20,54 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.all(25.0),
           child: Column(
             children: [
-              // Add margin top to Search Bar with + icon
-              Container(
-                margin: const EdgeInsets.only(top: 10), // Add top margin
-                child: Row(
-                  children: [
-                    // Search Bar
-                    Expanded(
-                      child: CustomSearchBar(), // Include the SearchBar widget
-                    )
-                  ],
-                ),
-              ),
-              const SizedBox(height: 30),
 
               // Categories Section
               const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Shop by category',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                  ),
+                  Align(
+                    alignment: Alignment.centerLeft, // This aligns the text to the left
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 12.0), // Optional padding
+                      child: Text(
+                        'Shop by category',
+                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  )
+
                 ],
               ),
               const SizedBox(height: 10),
 
               // Horizontal Scroll of Categories
-              SizedBox(
-                height: 60,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: const [
-                    CategoryIcon(
-                        imageUrl: 'assets/Landing/onboarding_1.png', name: '1'),
-                    CategoryIcon(
-                        imageUrl: 'assets/Landing/onboarding_1.png',
-                        name: ' 2'),
-                    CategoryIcon(
-                        imageUrl: 'assets/Landing/onboarding_1.png',
-                        name: ' 3'),
-                    CategoryIcon(
-                        imageUrl: 'assets/Landing/onboarding_1.png',
-                        name: ' 4'),
-                    CategoryIcon(
-                        imageUrl: 'assets/Landing/onboarding_1.png',
-                        name: ' 5'),
-                  ],
-                ),
+            // Horizontal Scroll of Categories
+            SizedBox(
+              height: 140, // Increase height to ensure enough space for the icons and text
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: const [
+                  CategoryIcon(
+                    imageUrl: 'assets/Home/Category/vegetables.jpeg',
+                    name: 'Vegetables',
+                  ),
+                  CategoryIcon(
+                    imageUrl: 'assets/Home/Category/Fruits.jpeg',
+                    name: 'Fruits',
+                  ),
+                  CategoryIcon(
+                    imageUrl: 'assets/Home/Category/Seeds.jpeg',
+                    name: 'Grains',
+                  ),
+                  CategoryIcon(
+                    imageUrl: 'assets/Home/Category/spices.jpeg',
+                    name: 'spices',
+                  ),
+
+                ],
               ),
-              const SizedBox(height: 40),
+            ),
+
 
               // Recommended Section
               const Row(
@@ -90,6 +88,30 @@ class HomePage extends StatelessWidget {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                   children: const [
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Mango',
+                      location: 'Deniyaya',
+                      price: '6 USD',
+                    ),
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Banana',
+                      location: 'Horana',
+                      price: '4 USD',
+                    ),
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Apples',
+                      location: 'Colombo',
+                      price: '10 USD',
+                    ),
+                    RecommendedItem(
+                      imageUrl: 'assets/Landing/onboarding_1.png',
+                      title: 'Tomatoes',
+                      location: 'Siripura',
+                      price: '1 USD',
+                    ),
                     RecommendedItem(
                       imageUrl: 'assets/Landing/onboarding_1.png',
                       title: 'Mango',
@@ -144,8 +166,8 @@ class CategoryIcon extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: 65,
+            height: 65,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8), // Rounded corners
               border: Border.all(
