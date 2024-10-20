@@ -1,4 +1,5 @@
 import ballerina/crypto;
+import ballerina/io;
 import ballerina/sql;
 import ballerinax/mysql;
 import ballerinax/mysql.driver as _;
@@ -29,8 +30,41 @@ configurable int PORT = ?;
 configurable string DATABASE = ?;
 
 final mysql:Client dbClient = check new (
-    host = HOST, user = USER, password = PASSWORD, port = PORT, database = "agrizone"
+    host = HOST, user = USER, password = PASSWORD, port = PORT, database = DATABASE
 );
+
+isolated function createTables() returns error? {
+    // Create Users table if not exists
+    sql:ExecutionResult result_user = check dbClient->execute(`
+        CREATE TABLE IF NOT EXISTS Users (
+            user_id INT AUTO_INCREMENT PRIMARY KEY,
+            firstname VARCHAR(100),
+            lastname VARCHAR(100),
+            email VARCHAR(100) UNIQUE,
+            password VARCHAR(100)
+        )
+    `);
+    io:println(result_user);
+
+    // Create Items table if not exists
+    sql:ExecutionResult result_items = check dbClient->execute(`
+        CREATE TABLE IF NOT EXISTS Items (
+            item_id INT AUTO_INCREMENT PRIMARY KEY,
+            item_name VARCHAR(100),
+            item_quantity INT,
+            item_price INT,
+            item_category VARCHAR(100),
+            item_image VARCHAR(255),
+            location VARCHAR(100),
+            details TEXT
+        )
+    `);
+    io:println(result_items);
+}
+
+public function main() returns error? {
+    check createTables();
+}
 
 isolated function registerUser(string firstname, string lastname, string email, string password) returns int|error {
     byte[] hashedPassword = crypto:hashMd5(password.toBytes());

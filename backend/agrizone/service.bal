@@ -178,34 +178,31 @@ service / on authListener {
 
         mime:Entity[] bodyParts = [];
 
-        foreach var itemId in items {
-            if itemId is string {
-                string fullImagePath = "./files/" + itemId + ".png";
+        foreach var item in items {
+            if item is map<anydata> && item.hasKey("item_id") {
+                var itemId = item["item_id"];
+                if itemId is int || itemId is string {
+                    string fullImagePath = "./files/" + itemId.toString() + ".png";
 
-                (byte[] & readonly)|io:Error imageBytes = io:fileReadBytes(fullImagePath);
+                    (byte[] & readonly)|io:Error imageBytes = io:fileReadBytes(fullImagePath);
 
-                if imageBytes is byte[] {
+                    if imageBytes is byte[] {
+                        mime:Entity mediaEntity = new;
+                        mediaEntity.setByteArray(imageBytes);
+                        mime:InvalidContentTypeError? contentType = mediaEntity.setContentType(mime:IMAGE_PNG);
+                        http:Response res = new;
+                        res.setEntity(mediaEntity);
 
-                    mime:Entity mediaEntity = new;
-                    mediaEntity.setByteArray(imageBytes);
-
-                    check mediaEntity.setContentType(mime:IMAGE_PNG);
-                    bodyParts.push(mediaEntity);
-                } else {
-                    json errorJson = {item_id: itemId, errors: "Image not found"};
-                    mime:Entity errorEntity = new;
-                    errorEntity.setJson(errorJson);
-                    bodyParts.push(errorEntity);
+                        check caller->respond(res);
+                    } else {
+                        json errorJson = {item_id: itemId, errors: "Image not found"};
+                        mime:Entity errorEntity = new;
+                        errorEntity.setJson(errorJson);
+                        bodyParts.push(errorEntity);
+                    }
                 }
             }
         }
-
-        mime:Entity parentEntity = new;
-        parentEntity.setBodyParts(bodyParts);
-        check parentEntity.setContentType(mime:MULTIPART_MIXED);
-        http:Response res = new;
-        res.setEntity(parentEntity);
-        check caller->respond(res);
     }
 
 }
