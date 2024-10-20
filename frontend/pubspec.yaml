@@ -69,7 +69,7 @@ flutter:
     - assets/Landing/
     - assets/Auth/
     - assets/Blog/
-    - assets/Home/Category/
+    - assets/Home/
     - .env
 
 
