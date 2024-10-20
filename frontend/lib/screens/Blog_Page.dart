@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../components/SearchBar.dart';
 import '../components/NavBar.dart';
 import 'BlogView.dart';
 
