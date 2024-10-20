@@ -179,7 +179,7 @@ class _SecondScreenState extends State<SecondScreen>
                             fit: BoxFit.cover,
                           ),
                           Image.asset(
-                            'assets/Landing/onboarding_3.jpeg',
+                            'assets/Landing/onboarding_3.png',
                             fit: BoxFit.cover,
                           ),
                         ],
