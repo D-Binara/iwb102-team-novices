@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Home_Page.dart';
 import 'package:frontend/services/auth_service.dart';
 import 'LogIn_Page.dart';
 
@@ -61,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   Navigator.of(context).pop();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => const LogInPage()),
                   );
                 },
                 child: const Text(
