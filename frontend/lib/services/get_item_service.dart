@@ -1,4 +1,4 @@
-import 'dart:convert'; 
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -55,27 +55,28 @@ class GetItemService {
   }
 
   Future<List<String>> fetchImages(List<int> itemIds) async {
-  List<String> imageUrls = [];
+    List<String> imageUrls = [];
 
-  for (int itemId in itemIds) {
-    final response = await http.get(Uri.parse('$baseUrl/items/serveImages/$itemId'));
+    for (int itemId in itemIds) {
+      final response = await http.get(
+        Uri.parse('$baseUrl/items/serveImages').replace(query: '$itemId.png'),
+      );
 
-    if (response.statusCode == 200) {
-      // Handle the image response as bytes
-      final imageBytes = response.bodyBytes;
-      
-      // Convert the bytes to a Base64 string to use in the frontend
-      final base64Image = base64Encode(imageBytes);
+      if (response.statusCode == 200) {
+        // Handle the image response as bytes
+        final imageBytes = response.bodyBytes;
 
-      // Use a data URL format to display the image
-      imageUrls.add('data:image/png;base64,$base64Image');
-    } else {
-      // If the image isn't found or there's an error, add a placeholder or empty image
-      imageUrls.add('');
+        // Convert the bytes to a Base64 string to use in the frontend
+        final base64Image = base64Encode(imageBytes);
+
+        // Use a data URL format to display the image
+        imageUrls.add('data:image/png;base64,$base64Image');
+      } else {
+        // If the image isn't found or there's an error, add a placeholder or empty image
+        imageUrls.add('');
+      }
     }
+
+    return imageUrls;
   }
-
-  return imageUrls;
-}
-
 }
