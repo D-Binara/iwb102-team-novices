@@ -43,7 +43,7 @@ service / on authListener {
             if (jsonMap is map<anydata>) {
                 string email = jsonMap.get("email").toString();
                 string password = jsonMap.get("password").toString();
-                string message = check loginUser(email, password);
+                json message = check loginUser(email, password);
                 json response = {message: message};
                 check caller->respond(response);
             } else {

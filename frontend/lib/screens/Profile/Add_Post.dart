@@ -4,6 +4,7 @@ import 'package:frontend/screens/Profile/Your_Post.dart';
 import 'package:frontend/services/item_service.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({super.key});
@@ -24,8 +25,7 @@ class _AddPostState extends State<AddPost> {
   final TextEditingController _priceController = TextEditingController();
   String? selectedCategory;
 
-  final ItemService apiService = ItemService(
-      'http://172.20.10.7:8080'); // Update with actual backend URL
+  final ItemService apiService = ItemService(dotenv.env['BASE_URL']!);
 
   // Pick image from gallery
   Future<void> _pickImage(int index) async {
@@ -77,12 +77,17 @@ class _AddPostState extends State<AddPost> {
               title: const Center(
                 child: Text(
                   'Add Successful',
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green, fontSize: 25),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.green,
+                      fontSize: 25),
                 ),
               ),
               content: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.5, // 50% of screen width
-                height: MediaQuery.of(context).size.height * 0.03, // 10% of screen height
+                width: MediaQuery.of(context).size.width *
+                    0.5, // 50% of screen width
+                height: MediaQuery.of(context).size.height *
+                    0.03, // 10% of screen height
                 child: const Center(
                   child: Text(
                     'Thank you for your Post',
@@ -97,7 +102,8 @@ class _AddPostState extends State<AddPost> {
                       Navigator.of(context).pop();
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const AddPost()),
+                        MaterialPageRoute(
+                            builder: (context) => const AddPost()),
                       );
                     },
                     child: const Text(
@@ -181,22 +187,22 @@ class _AddPostState extends State<AddPost> {
                           border: Border.all(color: Colors.green, width: 2),
                           borderRadius: BorderRadius.circular(8),
                           color:
-                          images[index] == null ? Colors.green[200] : null,
+                              images[index] == null ? Colors.green[200] : null,
                           image: images[index] != null
                               ? DecorationImage(
-                            image: FileImage(images[index]!),
-                            fit: BoxFit.cover,
-                          )
+                                  image: FileImage(images[index]!),
+                                  fit: BoxFit.cover,
+                                )
                               : null,
                         ),
                         child: images[index] == null
                             ? const Center(
-                          child: Icon(
-                            Icons.add_box_rounded,
-                            color: Colors.white,
-                            size: 50,
-                          ),
-                        )
+                                child: Icon(
+                                  Icons.add_box_rounded,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              )
                             : null,
                       ),
                     );
@@ -207,10 +213,12 @@ class _AddPostState extends State<AddPost> {
                   controller: _nameController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Product name',
                     labelStyle: TextStyle(color: Colors.black),
-                    focusedBorder: OutlineInputBorder( // Green border when focused
+                    focusedBorder: OutlineInputBorder(
+                      // Green border when focused
                       borderSide: BorderSide(color: Colors.green),
                     ),
                   ),
@@ -225,10 +233,12 @@ class _AddPostState extends State<AddPost> {
                 DropdownButtonFormField<String>(
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Category',
                     labelStyle: TextStyle(color: Colors.black),
-                    focusedBorder: OutlineInputBorder( // Green border when focused
+                    focusedBorder: OutlineInputBorder(
+                      // Green border when focused
                       borderSide: BorderSide(color: Colors.green),
                     ),
                   ),
@@ -264,10 +274,12 @@ class _AddPostState extends State<AddPost> {
                   controller: _locationController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Location',
                     labelStyle: TextStyle(color: Colors.black),
-                    focusedBorder: OutlineInputBorder( // Green border when focused
+                    focusedBorder: OutlineInputBorder(
+                      // Green border when focused
                       borderSide: BorderSide(color: Colors.green),
                     ),
                   ),
@@ -285,7 +297,8 @@ class _AddPostState extends State<AddPost> {
                     border: OutlineInputBorder(),
                     labelText: 'Product details',
                     labelStyle: TextStyle(color: Colors.black),
-                    focusedBorder: OutlineInputBorder( // Green border when focused
+                    focusedBorder: OutlineInputBorder(
+                      // Green border when focused
                       borderSide: BorderSide(color: Colors.green),
                     ),
                   ),
@@ -302,10 +315,12 @@ class _AddPostState extends State<AddPost> {
                   controller: _priceController,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
-                    contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                     labelText: 'Price (USD)',
                     labelStyle: TextStyle(color: Colors.black),
-                    focusedBorder: OutlineInputBorder( // Green border when focused
+                    focusedBorder: OutlineInputBorder(
+                      // Green border when focused
                       borderSide: BorderSide(color: Colors.green),
                     ),
                   ),
@@ -323,11 +338,13 @@ class _AddPostState extends State<AddPost> {
                     onPressed: _submitForm,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.green, // Button color
-                      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 100), // Button padding
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 100), // Button padding
                     ),
                     child: const Text(
                       'Post',
-                      style: TextStyle(color: Colors.white), // Set text color to white
+                      style: TextStyle(
+                          color: Colors.white), // Set text color to white
                     ),
                   ),
                 )

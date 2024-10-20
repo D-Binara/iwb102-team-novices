@@ -1,11 +1,12 @@
-import 'dart:convert'; // For JSON decoding
-import 'package:http/http.dart' as http; // HTTP package to make requests
+import 'dart:convert'; 
+import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-// Define a model to map the JSON response
+// Update Item class to hold image as byte array
 class Item {
   final int itemId;
   final double itemPrice;
-  final String itemImage;
+  String itemImage; // Change to String, but will hold base64 image or URL
   final String itemName;
   final String location;
   final String details;
@@ -23,12 +24,11 @@ class Item {
     required this.itemCategory,
   });
 
-  // Factory constructor to create an Item from JSON
   factory Item.fromJson(Map<String, dynamic> json) {
     return Item(
       itemId: json['item_id'],
       itemPrice: json['item_price'].toDouble(),
-      itemImage: json['item_image'],
+      itemImage: "", // Initially empty, we'll fill it later with fetched image
       itemName: json['item_name'],
       location: json['location'] ?? '',
       details: json['details'] ?? '',
@@ -40,19 +40,42 @@ class Item {
 
 // API Service class to handle network requests
 class GetItemService {
-  final String baseUrl = 'http://192.168.8.186:8080'; // Replace with your backend URL
+  final String? baseUrl = dotenv.env['BASE_URL'];
 
-  // Fetch items from the backend
+  // Fetch the items list
   Future<List<Item>> fetchItems() async {
     final response = await http.get(Uri.parse('$baseUrl/item/get'));
 
     if (response.statusCode == 200) {
       List<dynamic> data = json.decode(response.body);
-      // Map each item in the response to the Item model
       return data.map((item) => Item.fromJson(item)).toList();
     } else {
-      // Throw an error if the server did not return a 200 OK response
       throw Exception('Failed to load items');
     }
   }
+
+  Future<List<String>> fetchImages(List<int> itemIds) async {
+  List<String> imageUrls = [];
+
+  for (int itemId in itemIds) {
+    final response = await http.get(Uri.parse('$baseUrl/items/serveImages/$itemId'));
+
+    if (response.statusCode == 200) {
+      // Handle the image response as bytes
+      final imageBytes = response.bodyBytes;
+      
+      // Convert the bytes to a Base64 string to use in the frontend
+      final base64Image = base64Encode(imageBytes);
+
+      // Use a data URL format to display the image
+      imageUrls.add('data:image/png;base64,$base64Image');
+    } else {
+      // If the image isn't found or there's an error, add a placeholder or empty image
+      imageUrls.add('');
+    }
+  }
+
+  return imageUrls;
+}
+
 }

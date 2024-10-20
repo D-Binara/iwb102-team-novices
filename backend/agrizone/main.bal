@@ -83,7 +83,7 @@ isolated function registerUser(string firstname, string lastname, string email, 
     }
 }
 
-isolated function loginUser(string email, string password) returns string|error {
+isolated function loginUser(string email, string password) returns json|error {
     User user = check dbClient->queryRow(
         `SELECT * FROM Users WHERE email = ${email}`
     );
@@ -92,7 +92,15 @@ isolated function loginUser(string email, string password) returns string|error 
     string passwordHash = hashedPassword.toBase16();
 
     if user.password == passwordHash {
-        return "Login successful for user: " + email;
+        // Return user details as a JSON object
+        json userDetails = {
+            "loginStatus": "Login successful",
+            "userId": user.user_id,
+            "firstname": user.firstName,
+            "lastname": user.lastname,
+            "email": user.email
+        };
+        return userDetails;
     } else {
         return error("Invalid email or password");
     }

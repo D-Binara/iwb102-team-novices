@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/screens/LogIn_Page.dart';
 import 'package:frontend/screens/Profile/Add_Post.dart';
 import 'package:frontend/screens/Profile/Profile_Details.dart';
 import 'package:frontend/screens/Profile/Setting.dart';
-
+import 'package:frontend/services/auth_provider.dart';
+import 'package:provider/provider.dart';
 import '../components/NavBar.dart';
 
 class Profile extends StatelessWidget {
@@ -10,6 +12,8 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.green,
@@ -30,18 +34,18 @@ class Profile extends StatelessWidget {
                 child: CircleAvatar(
                   radius: 80,
                   backgroundColor: Colors.green[200],
-                  child: const Text(
-                    'Profile',
-                    style: TextStyle(color: Colors.white, fontSize: 30),
+                  child: Text(
+                    authProvider.firstname ?? 'Profile',
+                    style: const TextStyle(color: Colors.white, fontSize: 30),
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 20),
-            const Center(
+            Center(
               child: Text(
-                "Profile Details",
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                "${authProvider.firstname ?? ''} ${authProvider.lastname ?? ''}",
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
             ),
             const SizedBox(height: 20),
@@ -69,10 +73,9 @@ class Profile extends StatelessWidget {
                   );
                 }),
                 const SizedBox(height: 10),
-                // Log Out Button with red color
                 _buildTextButton(context, "Log Out", Icons.logout, () {
                   _showLogOutConfirmationDialog(context);
-                }, color: Colors.red), // Pass red color for Log Out button
+                }, color: Colors.red),
               ],
             ),
           ],
@@ -86,15 +89,15 @@ class Profile extends StatelessWidget {
   Widget _buildTextButton(BuildContext context, String label, IconData icon, VoidCallback onPressed, {Color? color}) {
     return TextButton.icon(
       onPressed: onPressed,
-      icon: Icon(icon, color: color ?? Colors.black), // Set color for left icon
+      icon: Icon(icon, color: color ?? Colors.black),
       label: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
             label,
-            style: TextStyle(fontSize: 18, color: color ?? Colors.black), // Set color for label text
+            style: TextStyle(fontSize: 18, color: color ?? Colors.black),
           ),
-          Icon(Icons.arrow_forward_ios, size: 16, color: color ?? Colors.black), // Right arrow icon color
+          Icon(Icons.arrow_forward_ios, size: 16, color: color ?? Colors.black),
         ],
       ),
       style: TextButton.styleFrom(
@@ -114,17 +117,21 @@ class Profile extends StatelessWidget {
             TextButton(
               child: const Text('Cancel'),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop();
               },
             ),
             TextButton(
-              child: const Text('Log Out',
+              child: const Text(
+                'Log Out',
                 style: TextStyle(fontSize: 18, color: Colors.red),
               ),
               onPressed: () {
-                // Add your log out logic here
-                Navigator.of(context).pop(); // Close the dialog
-                // Implement actual log out functionality
+                Provider.of<AuthProvider>(context, listen: false).logout();
+                Navigator.of(context).pop(); 
+                 Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const LogInPage()),
+                  );
               },
             ),
           ],
@@ -132,10 +139,4 @@ class Profile extends StatelessWidget {
       },
     );
   }
-}
-
-void main() {
-  runApp(const MaterialApp(
-    home: Profile(),
-  ));
 }

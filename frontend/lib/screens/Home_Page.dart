@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/screens/Profile_Page.dart';
 import '../components/NavBar.dart';
 import '../components/SearchBar.dart';
 

@@ -158,6 +158,7 @@ class _LogInPageState extends State<LogInPage> {
                     String password = _passwordController.text;
 
                     var response = await _authService.loginUser(
+                      context: context,
                       email: email,
                       password: password,
                     );
