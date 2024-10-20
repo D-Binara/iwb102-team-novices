@@ -253,8 +253,12 @@ class _AddPostState extends State<AddPost> {
                       child: Text('Fruits'),
                     ),
                     DropdownMenuItem(
-                      value: 'Other',
-                      child: Text('Other'),
+                      value: 'Grains',
+                      child: Text('Grains'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'spices',
+                      child: Text('spices'),
                     ),
                   ],
                   onChanged: (value) {
