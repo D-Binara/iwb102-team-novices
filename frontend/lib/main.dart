@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/screens/Landing_Page.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:frontend/services/auth_provider.dart';
+import 'package:provider/provider.dart';
 
-
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
+ runApp(
+    ChangeNotifierProvider(
+      create: (_) => AuthProvider(), // Provide the AuthProvider globally
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LandingPage(),  // This should point to the widget you're working on
+      home: LandingPage(), // This should point to the widget you're working on
     );
   }
 }

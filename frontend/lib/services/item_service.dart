@@ -21,7 +21,7 @@ class ItemService {
       'item_quantity': itemQuantity,
       'item_price': itemPrice,
       'item_category': itemCategory,
-      'item_image': '', // Placeholder for images, handled separately
+      'item_image': '', 
       'location': location,
       'details': details,
     });
