@@ -1,9 +1,5 @@
 # iwb102-team-novices
 
-# Project Name
-
-This project consists of both a frontend (Flutter) and backend (Ballerina) application. The frontend communicates with the backend API, and the backend connects to a database. This guide will walk you through setting up both the frontend and backend locally.
-
 ## Prerequisites
 
 Make sure you have the following installed before you proceed:
