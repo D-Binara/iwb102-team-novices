@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:async';
 import 'package:flutter/material.dart';
 
@@ -5,7 +6,7 @@ class ItemDetailPage extends StatefulWidget {
   final String title;
   final String location;
   final String price;
-  final List<String> images;
+  final List<String> images; // List of base64 encoded images
   final String description;
 
   const ItemDetailPage({
@@ -24,30 +25,32 @@ class ItemDetailPage extends StatefulWidget {
 class _ItemDetailPageState extends State<ItemDetailPage> {
   int _currentIndex = 0;
   late PageController _pageController;
+  late Timer _timer;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
-    Future.delayed(Duration.zero, () {
-      Timer.periodic(const Duration(seconds: 2), (timer) {
-        if (_currentIndex < widget.images.length - 1) {
-          _currentIndex++;
-        } else {
-          _currentIndex = 0;
-        }
-        _pageController.animateToPage(
-          _currentIndex,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      });
+    
+    // Start the timer to auto-scroll through images
+    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
+      if (_currentIndex < widget.images.length - 1) {
+        _currentIndex++;
+      } else {
+        _currentIndex = 0;
+      }
+      _pageController.animateToPage(
+        _currentIndex,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeInOut,
+      );
     });
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _timer.cancel(); // Cancel the timer when disposing
     super.dispose();
   }
 
@@ -82,8 +85,21 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
-                        child: Image.asset(widget.images[index],
-                            fit: BoxFit.cover),
+                        child: widget.images.isNotEmpty
+                            ? Image.memory(
+                                base64Decode(widget.images[index].split(',').last), // Decode the base64 string
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return Image.asset(
+                                    'assets/placeholder.png',
+                                    fit: BoxFit.cover,
+                                  );
+                                },
+                              )
+                            : Image.asset(
+                                'assets/placeholder.png', // Placeholder image if no images are available
+                                fit: BoxFit.cover,
+                              ),
                       ),
                     );
                   },
@@ -99,8 +115,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     height: 8,
                     width: 8,
                     decoration: BoxDecoration(
-                      color:
-                          _currentIndex == index ? Colors.green : Colors.black,
+                      color: _currentIndex == index ? Colors.green : Colors.black,
                       shape: BoxShape.circle,
                     ),
                   );
@@ -120,8 +135,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                               fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                       ),
-                      const SizedBox(
-                          width: 10), // Space between title and button
+                      const SizedBox(width: 10), // Space between title and button
                       ElevatedButton(
                         onPressed: () {
                           // Add action for 'BUY' button
