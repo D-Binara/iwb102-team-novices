@@ -3,7 +3,6 @@ import '../components/SearchBar.dart';
 import '../components/NavBar.dart';
 import 'BlogView.dart';
 
-
 class BlogPage extends StatelessWidget {
   const BlogPage({super.key});
 
@@ -127,401 +126,409 @@ class BlogPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.green,
-        elevation: 0,
-        title: const Text("Blog Page", style: TextStyle(color: Colors.black)),
-        iconTheme: const IconThemeData(color: Colors.black),
+    return DefaultTabController(
+      length: 2,
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context)
+              .unfocus(); // Hide the keyboard when tapping outside
+        },
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.green,
+            elevation: 0,
+            title:
+                const Text("Blog Page", style: TextStyle(color: Colors.black)),
+            iconTheme: const IconThemeData(color: Colors.black),
+          ),
+          body: Column(
+            children: <Widget>[
+              Container(
+                height: 168,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Sri Lanka Rice",
+                              content:
+                                  sriLankaRice, // Use the defined content here
+                              imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
+                        title:
+                            'Sri Lanka Rice Prices Stabilize After Harvest Season',
+                        views: '3500 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Ceylon Tea",
+                              content: CeylonTea,
+                              imageUrl: 'assets/Blog/ceylon_tea.jpeg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/ceylon_tea.jpeg',
+                        title: 'Ceylon Tea Prices Surge Amid Global Demand',
+                        views: '4200 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Pepper",
+                              content: Pepper,
+                              imageUrl: 'assets/Blog/pepper.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/pepper.jpg',
+                        title: 'Sri Lankan Spices: Pepper and Cinnamon Prices',
+                        views: '2900 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Cinnamon",
+                              content: Cinnamon,
+                              imageUrl: 'assets/Blog/cinnamon.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/cinnamon.jpg',
+                        title: 'Cinnamon Prices in Sri Lanka Continue to Soar',
+                        views: '3200 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Fish",
+                              content: Fish,
+                              imageUrl: 'assets/Blog/fish.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/fish.jpg',
+                        title:
+                            'Fresh Tuna Prices Decline After Increase in Supply',
+                        views: '2500 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Tomato",
+                              content: Tomato,
+                              imageUrl: 'assets/Blog/tomato.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/tomato.jpg',
+                        title: 'Tomato Prices Fall Due to High Yield',
+                        views: '3100 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Carrot",
+                              content: Carrot,
+                              imageUrl: 'assets/Blog/carrot.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/carrot.jpg',
+                        title: 'Carrot Prices Fall Due to High Yield',
+                        views: '3100 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Mango",
+                              content: Mango,
+                              imageUrl: 'assets/Blog/mango.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/mango.jpg',
+                        title: 'Fruit Exports: Mango and Banana Prices Surge',
+                        views: '2700 views',
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Corn",
+                              content: Corn,
+                              imageUrl: 'assets/Blog/corn.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: const MostViewedItem(
+                        imageUrl: 'assets/Blog/corn.jpg',
+                        title: 'Corn Prices Stable Amid Steady Domestic Demand',
+                        views: '2800 views',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(8.0),
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Ceylon Tea",
+                              content: CeylonTea,
+                              imageUrl: 'assets/Blog/ceylon_tea.jpeg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/ceylon_tea.jpeg',
+                        title: 'Ceylon Tea Export Prices Hit Record Highs',
+                        price: 'LKR 1,200/kg',
+                        date: 'Oct 8, 2024',
+                        views: '4200 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Sri Lanka Rice",
+                              content: sriLankaRice,
+                              imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
+                        title: 'Local Rice Prices Steady Amid Strong Harvest',
+                        price: 'LKR 110/kg',
+                        date: 'Oct 7, 2024',
+                        views: '3500 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Pepper",
+                              content: Pepper,
+                              imageUrl: 'assets/Blog/pepper.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/pepper.jpg',
+                        title: 'Pepper and Cinnamon Prices Rise in 2024',
+                        price: 'LKR 950/kg',
+                        date: 'Oct 6, 2024',
+                        views: '2900 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Cinnamon",
+                              content: Cinnamon,
+                              imageUrl: 'assets/Blog/cinnamon.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/cinnamon.jpg',
+                        title: 'Cinnamon Prices in Sri Lanka Continue to Soar',
+                        price: 'LKR 3,500/kg',
+                        date: 'Oct 7, 2024',
+                        views: '3200 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Fish",
+                              content: Fish,
+                              imageUrl: 'assets/Blog/fish.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/fish.jpg',
+                        title:
+                            'Fresh Tuna Prices Decline After Increase in Supply',
+                        price: 'LKR 1500/kg',
+                        date: 'Oct 8, 2024',
+                        views: '2500 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Tomato",
+                              content: Tomato,
+                              imageUrl: 'assets/Blog/tomato.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/tomato.jpg',
+                        title: 'Tomato Prices Fall Due to High Yield',
+                        price: 'LKR 90/kg',
+                        date: 'Oct 9, 2024',
+                        views: '3100 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Carrot",
+                              content: Carrot,
+                              imageUrl: 'assets/Blog/carrot.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/carrot.jpg',
+                        title: 'Carrot Prices Fall Due to High Yield',
+                        price: 'LKR 90/kg',
+                        date: 'Oct 9, 2024',
+                        views: '3100 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Mango",
+                              content: Mango,
+                              imageUrl: 'assets/Blog/mango.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/mango.jpg',
+                        title: 'Mango Exports Reach Record Prices in 2024',
+                        price: 'LKR 200/kg',
+                        date: 'Oct 10, 2024',
+                        views: '2700 views',
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const BlogView(
+                              title: "Corn",
+                              content: Corn,
+                              imageUrl: 'assets/Blog/corn.jpg',
+                            ),
+                          ),
+                        );
+                      },
+                      child: BlogCard(
+                        imageUrl: 'assets/Blog/corn.jpg',
+                        title: 'Corn Prices Stable Amid Steady Domestic Demand',
+                        price: 'LKR 120/kg',
+                        date: 'Oct 10, 2024',
+                        views: '2800 views',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          bottomNavigationBar: const NavBar(),
+        ),
       ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: CustomSearchBar(),
-          ),
-          Container(
-            height: 168,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              children: <Widget>[
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Sri Lanka Rice",
-                          content: sriLankaRice, // Use the defined content here
-                          imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
-                    title:
-                        'Sri Lanka Rice Prices Stabilize After Harvest Season',
-                    views: '3500 views',
-                  ),
-                ),
-
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Ceylon Tea",
-                          content: CeylonTea,
-                          imageUrl: 'assets/Blog/ceylon_tea.jpeg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/ceylon_tea.jpeg',
-                    title: 'Ceylon Tea Prices Surge Amid Global Demand',
-                    views: '4200 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Pepper",
-                          content: Pepper,
-                          imageUrl: 'assets/Blog/pepper.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/pepper.jpg',
-                    title: 'Sri Lankan Spices: Pepper and Cinnamon Prices',
-                    views: '2900 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Cinnamon",
-                          content: Cinnamon,
-                          imageUrl: 'assets/Blog/cinnamon.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/cinnamon.jpg',
-                    title: 'Cinnamon Prices in Sri Lanka Continue to Soar',
-                    views: '3200 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Fish",
-                          content: Fish,
-                          imageUrl: 'assets/Blog/fish.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/fish.jpg',
-                    title: 'Fresh Tuna Prices Decline After Increase in Supply',
-                    views: '2500 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Tomato",
-                          content: Tomato,
-                          imageUrl: 'assets/Blog/tomato.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/tomato.jpg',
-                    title: 'Tomato Prices Fall Due to High Yield',
-                    views: '3100 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Carrot",
-                          content: Carrot,
-                          imageUrl: 'assets/Blog/carrot.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/carrot.jpg',
-                    title: 'Carrot Prices Fall Due to High Yield',
-                    views: '3100 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Mango",
-                          content: Mango,
-                          imageUrl: 'assets/Blog/mango.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/mango.jpg',
-                    title: 'Fruit Exports: Mango and Banana Prices Surge',
-                    views: '2700 views',
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Corn",
-                          content: Corn,
-                          imageUrl: 'assets/Blog/corn.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: const MostViewedItem(
-                    imageUrl: 'assets/Blog/corn.jpg',
-                    title: 'Corn Prices Stable Amid Steady Domestic Demand',
-                    views: '2800 views',
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.all(8.0),
-              children: <Widget>[
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Ceylon Tea",
-                          content: CeylonTea,
-                          imageUrl: 'assets/Blog/ceylon_tea.jpeg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/ceylon_tea.jpeg',
-                    title: 'Ceylon Tea Export Prices Hit Record Highs',
-                    price: 'LKR 1,200/kg',
-                    date: 'Oct 8, 2024',
-                    views: '4200 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Sri Lanka Rice",
-                          content: sriLankaRice,
-                          imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/sri_lanka_rice.jpg',
-                    title: 'Local Rice Prices Steady Amid Strong Harvest',
-                    price: 'LKR 110/kg',
-                    date: 'Oct 7, 2024',
-                    views: '3500 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Pepper",
-                          content: Pepper,
-                          imageUrl: 'assets/Blog/pepper.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/pepper.jpg',
-                    title: 'Pepper and Cinnamon Prices Rise in 2024',
-                    price: 'LKR 950/kg',
-                    date: 'Oct 6, 2024',
-                    views: '2900 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Cinnamon",
-                          content: Cinnamon,
-                          imageUrl: 'assets/Blog/cinnamon.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/cinnamon.jpg',
-                    title: 'Cinnamon Prices in Sri Lanka Continue to Soar',
-                    price: 'LKR 3,500/kg',
-                    date: 'Oct 7, 2024',
-                    views: '3200 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Fish",
-                          content: Fish,
-                          imageUrl: 'assets/Blog/fish.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/fish.jpg',
-                    title: 'Fresh Tuna Prices Decline After Increase in Supply',
-                    price: 'LKR 1500/kg',
-                    date: 'Oct 8, 2024',
-                    views: '2500 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Tomato",
-                          content: Tomato,
-                          imageUrl: 'assets/Blog/tomato.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/tomato.jpg',
-                    title: 'Tomato Prices Fall Due to High Yield',
-                    price: 'LKR 90/kg',
-                    date: 'Oct 9, 2024',
-                    views: '3100 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Carrot",
-                          content: Carrot,
-                          imageUrl: 'assets/Blog/carrot.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/carrot.jpg',
-                    title: 'Carrot Prices Fall Due to High Yield',
-                    price: 'LKR 90/kg',
-                    date: 'Oct 9, 2024',
-                    views: '3100 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Mango",
-                          content: Mango,
-                          imageUrl: 'assets/Blog/mango.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/mango.jpg',
-                    title: 'Mango Exports Reach Record Prices in 2024',
-                    price: 'LKR 200/kg',
-                    date: 'Oct 10, 2024',
-                    views: '2700 views',
-                  ),
-                ),
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BlogView(
-                          title: "Corn",
-                          content: Corn,
-                          imageUrl: 'assets/Blog/corn.jpg',
-                        ),
-                      ),
-                    );
-                  },
-                  child: BlogCard(
-                    imageUrl: 'assets/Blog/corn.jpg',
-                    title: 'Corn Prices Stable Amid Steady Domestic Demand',
-                    price: 'LKR 120/kg',
-                    date: 'Oct 10, 2024',
-                    views: '2800 views',
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: const NavBar(),
     );
   }
 }
@@ -531,7 +538,8 @@ class MostViewedItem extends StatelessWidget {
   final String title;
   final String views;
 
-  const MostViewedItem({super.key,
+  const MostViewedItem({
+    super.key,
     required this.imageUrl,
     required this.title,
     required this.views,
@@ -638,12 +646,14 @@ class BlogCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         date,
-                        style: const TextStyle(color: Colors.grey, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                       const Spacer(),
                       Text(
                         views,
-                        style: const TextStyle(color: Colors.grey, fontSize: 12),
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 12),
                       ),
                     ],
                   ),

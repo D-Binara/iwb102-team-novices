@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CustomSearchBar extends StatelessWidget {
+  final Function(String) onSearch; // Callback for search
+
+  const CustomSearchBar({Key? key, required this.onSearch}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -9,12 +13,12 @@ class CustomSearchBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(20), // Rounded corners
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: const TextField(
+      child: TextField(
+        onChanged: onSearch, // Call the onSearch function with the query
         decoration: InputDecoration(
-          // Search icon
-          hintText: 'Search in here',
+          hintText: 'Search items...',
           border: InputBorder.none,
-          suffixIcon: Icon(Icons.search),// Remove underline
+          suffixIcon: const Icon(Icons.search), // Search icon
         ),
       ),
     );

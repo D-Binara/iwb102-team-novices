@@ -24,14 +24,6 @@ class HomePage extends StatelessWidget {
               // Add margin top to Search Bar with + icon
               Container(
                 margin: const EdgeInsets.only(top: 10), // Add top margin
-                child: Row(
-                  children: [
-                    // Search Bar
-                    Expanded(
-                      child: CustomSearchBar(), // Include the SearchBar widget
-                    )
-                  ],
-                ),
               ),
               const SizedBox(height: 30),
 
